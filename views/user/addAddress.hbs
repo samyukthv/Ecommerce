@@ -1,0 +1,49 @@
+{{>userHeader}}
+<!-- breadcrumb start-->
+  <section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <h2>Add New Address</h2>
+              <p>Home <span>-</span>Add New Address</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section style="background-color: #ecfdff;">
+    <div class="container  mx-5">
+<div class="col-md-12 border-right  " style="width: 100%;">
+    {{#each userdt}}
+          <form action="/addaddress/{{this._id}}"  method="post" style="border-right: ">
+            <div class="p-3 py-5" style="width: 100%;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6 mb-3"><label class="labels">street</label><input type="text" class="form-control" placeholder="street" value=""  name="street"></div>
+                    <div class="col-md-6"><label class="labels">district</label><input type="text" class="form-control" value="" placeholder="district" name="district"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 mb-3 "><label class="labels">state</label><input type="text" class="form-control" placeholder="state" value="" name="state"></div>
+                    <div class="col-md-12 mb-3"><label class="labels">country</label><input type="text" class="form-control" placeholder="country" value="" name="country"></div>
+                   
+                    <div class="col-md-6 mb-3"><label class="labels">pincode</label><input type="number" class="form-control" placeholder="pincode" value=""  name="pincode"></div>
+                
+                
+            </div>
+            <div class="mt-5 text-center mb-3"><button class="btn btn-primary profile-button" type="submit">Save address</button></div>
+            </form>
+            {{/each}}
+        </div>
+        </div>
+
+</section>
+
+
+{{>userFooter}}

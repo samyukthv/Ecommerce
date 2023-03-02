@@ -1,0 +1,122 @@
+{{>navbar}}
+
+
+<div style="display: flex;">
+  {{>sidebar}}
+
+  <div style="margin-top: 70px; width:100%">
+    <div class="col-lg-12 grid-margin stretch-card ">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title " style=" text-align: center;">Category list</h4>
+
+
+          <div class="table-responsive">
+            <table class="table table-dark" id="Table">
+              <thead>
+                <tr>
+                  <th>S.no</th>
+                  <th>Category name </th>
+                  <th>Description</th>
+                  <th>Created at</th>
+                  <th>Stock </th>
+                  <th>image</th>
+                  <th>Actions</th>
+
+
+
+
+
+                </tr>
+              </thead>
+              <tbody>
+                {{#each data}}
+                <tr>
+                  <th scope="row">{{inc @index}}</th>
+                  <td>{{this.categoryName}}</td>
+                  <td>{{this.description}}</td>
+                  <td>{{this.created_at}}</td>
+                  <td>{{this.stock}}</td>
+                  <td><img style="width:10vh; height: 5%; border-radius: 0;" src="/images/{{this.image.[0]}}"
+                      alt="image" /></td>
+
+                  <td>
+                    <a> <span  class="me-3" onclick="alerted('{{this._id}}')">
+                      <i class="fa-solid fa-trash-alt"></i></span>
+                    </a>
+                    <a class="ml-3" style="margin-left: 10px;" href="/admin/editCategory?id={{this._id}}">
+                      <i class="fa-solid fa-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+{{>footer}}
+
+
+
+
+
+
+
+<script>
+  function viewImage(event) {
+    document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+  }
+</script>
+
+
+
+
+
+
+<script>
+  function alerted(proId) {
+    Swal.fire({
+     
+      title: 'Are you sure?',
+      text: "you want to delete this category permanently",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes,blocked it'
+    }).then((result) => {
+
+      $.ajax({
+
+        url: '/admin/deleteCategory/' + proId,
+        method: 'get',
+        success: (response) => {
+          if (result.isConfirmed) {
+            console.log("hellooooooooooooooooooo")
+            Swal.fire({
+              icon: 'success',
+              title: 'category deleted successfully',
+              showConfirmButton: false,
+            })
+            setTimeout(() => {
+              location.reload()
+            }, 800)
+          }
+        }
+      })
+
+    })
+  }
+</script>

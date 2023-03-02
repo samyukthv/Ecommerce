@@ -1,0 +1,114 @@
+{{>navbar}}
+
+
+<div style="display: flex;">
+    {{>sidebar}}
+
+    <div style="margin-top: 70px;">
+        <section class="h-100 gradient-custom">
+            <div class="container py-5 h-100 " style="overflow: hidden;">
+                <h4 class="card-title"
+                    style="text-align: center; font-size: 28px; font-weight: bold; color: #f8f8f8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">
+                    Order Details</h4>
+                <a href="/admin/orderList"><button type="button" class="btn-close"><span class="visually-hidden">X</span></button></a>
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-10 col-xl-8">
+                        <div class="card" style="border-radius: 10px;">
+
+                            <div class="card-body p-4">
+                                {{#each orderdt.products}}
+                                <div class="card shadow-0 border mb-4" style="background-color:white">
+                                    <div class="card-body">
+                                        <div class="row" style="background-color:white display: flex ;
+                  justify-content: space-around">
+                                            <div class="col-md-2">
+                                                <img src="/images/{{this.productId.image.[0]}}" class="img-fluid"
+                                                    alt="Phone">
+                                            </div>
+                                            <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0"><strong>Name: </strong>
+                                                    {{this.productId.productName}}</p>
+                                            </div>
+
+                                            <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small"><strong> Quantity:
+                                                    </strong>{{this.quantity}}</p>
+                                            </div>
+
+                                            <div
+                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small" style="margin-right: auto;">
+                                                    <strong>Price:</strong> {{this.singleTotal}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-md-10">
+                                                <p class="text-muted mb-3 small">
+                                                    <strong>Address:</strong> {{../orderdt.deliveryAddress}}
+                                                </p>
+                                                <div class="d-flex justify-content-around mb-1">
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-5">
+                                                        <strong>OrderID:</strong> {{../orderdt.orderId}}
+                                                    </p>
+                                                    <p class="text-muted ml-3 mt-1 mb-0 small ms-xl-5">
+                                                        <strong>Delivery Status:</strong> {{../orderdt.status}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                                <div class="d-flex justify-content-between pt-2">
+                                    <p class="fw-bold mb-0">Shipping Charge</p>
+                                    <p class="text-muted mb-0"><span class="fw-bold me-4">Flat </span> $ 50.00</p>
+                                </div>
+
+                                <div class="d-flex justify-content-between pt-2">
+                                    <p class="fw-bold mb-0">Order Details</p>
+                                    <p class="text-muted mb-0"><span class="fw-bold me-4">Total :
+                                        </span>${{orderdt.total}}</p>
+                                </div>
+
+                                {{!-- <div class="d-flex justify-content-between pt-2">
+                                    <p class="text-muted mb-0">Invoice Number : 788152</p>
+                                    <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <p class="text-muted mb-0">Invoice Date : 22 Dec,2019</p>
+                                    <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-5">
+                                    <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
+                                    <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free
+                                    </p>
+                                </div> --}}
+                            </div>
+                            {{!-- <div class="card-footer border-0 px-4 py-5"
+                                style="background-color: #ffffff; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                                <h5 class="d-flex align-items-center justify-content-end  text-uppercase mb-0"
+                                    style="color: black;">Total
+                                    paid: <span class="h2 mb-0 ms-2" style="color:black;">$1040</span></h5>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+{{>footer}}

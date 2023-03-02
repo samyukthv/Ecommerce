@@ -1,0 +1,76 @@
+{{>navbar}}
+
+
+<div style="display: flex;">
+{{>sidebar}}
+
+<div style="margin-top: 100px; width:100%">
+
+
+
+
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Add Product</h4>
+      <p class="card-description">Please fill out the form below to add a new product.</p>
+      <form action="/admin/addProduct" enctype="multipart/form-data" method="post" class="forms-sample">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" style="color: white;" class="form-control" id="productName" name="productName" placeholder="Enter product name" required>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" style="color: white;" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity" required>
+            </div>
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select class="form-control" style="color: white;" id="category" name="categoryName" required>
+                {{#each category}}
+                <option>{{this.categoryName}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="stock">Stock</label>
+              <select class="form-control" style="color: white;" id="stock" name="stock" required>
+                <option selected disabled>Select</option>
+                <option>In Stock</option>
+                <option>Out of Stock</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" style="color: white;" class="form-control" id="price" name="price" placeholder="Enter price" required>
+            </div>
+            <div class="form-group">
+              <label for="description">Product Description</label>
+              <textarea class="form-control" style="color: white;" id="description" name="description" rows="5" placeholder="Enter product description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="images">Images</label>
+              <input type="file" class="form-control-file" style="color: white;" id="images" name="images" multiple required>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+        <button type="reset" class="btn btn-light">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<style>
+      input {
+        color: white;
+      }
+    </style>
+
+
+{{>footer}}

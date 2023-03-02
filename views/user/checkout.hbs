@@ -1,0 +1,310 @@
+{{>userHeader}}
+
+
+<!-- Header part end-->
+
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Product Checkout</h2>
+                        <p>Home <span>-</span>Product Checkout</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+<!--================Checkout Area =================-->
+
+
+<section class="checkout_area padding_top">
+    <div class="container ">
+
+        <div class="cupon_area">
+
+            <h2 class="mb-4">Enter coupon details</h2>
+        <form id="coupon-form-submit">
+            <p></p>
+
+            <input type="text" placeholder="Enter coupon code" id="coupon" name="coupon">
+             {{!-- <input type="hidden" placeholder="Enter coupon code" id="coupon" name="coupon"> --}}
+
+            <button class="btn_3" type="submit" form="coupon-form-submit"> Apply Coupon</button>
+            <small id="codestate"></small>
+
+          </form>
+
+        </div>
+        <div class="billing_details ">
+
+            <div class="row">
+
+                <div class="col-lg-8">
+                    <form action="/orderConfirmation" method="post" id="form">
+
+
+                        <h2 class="mb-4">Select Address</h2>
+
+
+
+
+                        {{#each addressfind.address}}
+
+
+
+                        <div class="card text-center mt-3">
+                            <div class="form-check" style="position: absolute; top: 12px; left: 12px;">
+                                <input class="form-check-input" type="radio" name="deliveryAddress" id=""
+                                    value="{{this.street}},{{this.district}},{{this.state}},{{this.country}}-{{this.pincode}}"
+                                    checked>
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Select Address
+                                </label>
+                            </div>
+
+                            <div class="card-body" style="margin-top: 50px;">
+                                <h5>{{this.street}},{{this.district}},{{this.state}},{{this.country}},{{this.pincode}}
+                                </h5>
+                            </div>
+
+                        </div>
+                        {{/each}}
+                        <div class="mt-5">
+                           
+
+
+
+                            <div class="text-center">
+                                <a href="" class="btn_3" data-toggle="modal"
+                                    data-target="#modalRegisterForm">
+                                    Click Here To Add New Address</a>
+                            </div>
+
+
+                           
+                        </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <h2>Your Order</h2>
+
+                        <ul class="list">
+                            <li>
+                                <a href="#">Product
+                                    <span>Total</span>
+                                </a>
+                            </li>
+                            {{#each productfind.cart}}
+
+                            <li>
+                                <a href="#">{{this.productid.productName}}
+                                    <span class="middle" style="align-items: center;">{{this.quantity}}x</span>
+                                    <span class="last">{{this.total}}</span>
+                                </a>
+                                <input type="hidden" name="productid" value="{{this.productid._id}}" form="form">
+                                <input type="hidden" name="quantity" value="{{this.quantity}}" form="form">
+                                <input type="hidden" name="price" value="{{ this.total}}" form="form">
+                               
+
+                            </li>
+                            {{/each}}
+                             <input type="hidden" id="coupon1" name="coupon" value="" form="form">
+                               <input type="hidden" id="discount1" name="discount" value="" form="form">
+
+                        </ul>
+                        <ul class="list list_2">
+                            <li>
+                                <a href="#">Subtotal
+                                    <span>{{productfind.totalbill}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Shipping
+                                    <span>Flat rate: $50.00</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Coupon Discount
+                                     <span id="disc"  name="disc" class="text-success">0</span>
+                                    
+                                     <input type="hidden" name="total" value="{{total}}" form="form"> 
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Total
+                                    <span id="total">{{total}}</span>
+
+                                    {{!-- <input type="hidden" name="total" value="{{total}}" form="form"> --}}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option5" name="paymentType" value="cash on delivery"
+                                    required />
+                                <label for="f-option5">Cash On Delivery</label>
+                                <div class="check"></div>
+                            </div>
+                            <p>
+                                Please pay the cash at the time of your delivery, through
+                                cash or UPI.
+                            </p>
+                        </div>
+                        <div class="payment_item active">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option6" name=" paymentType" value="online payment" />
+                                <label for="f-option6">Paypal </label>
+                                <img src="/assetuser/img/product/single-product/card.jpg" alt="" />
+                                <div class="check"></div>
+                            </div>
+                            <p>
+                                Please send a check to Store Name, Store Street, Store Town,
+                                Store State / County, Store Postcode.
+                            </p>
+                        </div>
+
+                        <div class="creat_account">
+                            <input type="checkbox" id="f-option4" name="selector" />
+                            <label for="f-option4">I've read and accept the </label>
+                            <a href="#">terms & conditions*</a>
+                        </div>
+
+                        <input type="hidden" name="userId" value="{{id}}" form="form">
+
+                        <button class="btn_3" style="border:transparent;" type="submit" form="form"> proceed to
+                            payment</button>
+                    </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Add Address</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/checkoutAddress" method="post" id="form1">
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2">
+                    
+                    <input type="text" id="orangeForm-name" class="form-control validate" name="street" form="form1">
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">Street</label>
+                </div>
+              <div class="md-form mb-2">
+                    
+                    <input type="text" id="orangeForm-name" class="form-control validate" name="district" form="form1">
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">District</label>
+                </div>
+                <div class="md-form mb-2">
+                    
+                    <input type="text" id="orangeForm-name" class="form-control validate" name="state" form="form1">
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">State</label>
+                </div>
+                <div class="md-form mb-2">
+                    
+                    <input type="text" id="orangeForm-name" class="form-control validate" name="country" form="form1">
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">Country</label>
+                </div>
+
+                <div class="md-form mb-2">
+                    
+                    <input type="number" id="orangeForm-name" class="form-control validate" name="pincode" form="form1">
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">Pincode</label>
+                </div>
+
+            </div>
+            </form>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="submit" class="btn_3" form="form1">Submit Address</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+  integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+
+$("#coupon-form-submit").submit((e) => {
+    let couponValue = document.getElementById('coupon').value
+   // let discountValue = document.getElementById('discount').value
+
+    console.log(couponValue)
+    e.preventDefault()
+    $.ajax({
+      url: '/checkCoupon/' + couponValue,
+      method: 'post',
+     
+      success: (response) => {
+        if (response.status) {
+          console.log(response.discountPrice)
+          $("#total").load(location.href + " #total");
+          //document.getElementById('coupon1').innerText = couponValue
+          $("#discount1").val(response.discountPrice);
+         $("#coupon1").val(couponValue);
+          //$("#discount1").val(discountValue);
+         
+          document.getElementById('disc').innerText = '$' + response.discountPrice
+            document.getElementById('codestate').style.color = "green"
+          document.getElementById('codestate').innerText = 'Coupon applied successfully'
+        } else if (response.used) {
+          document.getElementById('codestate').style.color = "red"
+          document.getElementById('codestate').innerText = 'Coupon already used!'
+        } else if (response.expired) {
+          document.getElementById('codestate').style.color = "red"
+          document.getElementById('codestate').innerText = 'Sorry coupon is expired!'
+        } else if (response.noMatch) {
+          document.getElementById('codestate').style.color = "red"
+          document.getElementById('codestate').innerText = 'Oops invalid coupon code!'
+        }
+      }
+    })
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</script>
+
+
+{{>userFooter}}

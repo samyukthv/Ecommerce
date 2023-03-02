@@ -1,0 +1,134 @@
+{{>navbar}}
+
+
+<div style="display: flex;">
+  {{>sidebar}}
+  <div style="margin-top: 70px; width:100%">
+
+
+
+
+    <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-description mt-5 mb-5">
+          <h2>Edit Product</h2>
+          </p>
+      
+          <form action="/admin/updateProduct/{{data._id}}" enctype="multipart/form-data" method="post" class="forms-sample mt-5">
+            <div class="form-group col-5">
+              <label for="exampleInputName1">Name</label>
+              <input type="text" style="color: white" name="productName" class="form-control" id="exampleInputName1"
+                placeholder="productName" value="{{data.productName}}">
+            </div>
+
+            <div class="form-group col-5" style="color: white">
+              <label for="exampleInputPassword4">Quantity</label>
+              <input type="number" style="color: white" name="quantity" class="form-control" id="exampleInputPassword4"
+                placeholder="QTY" required="" value="{{data.quantity}}">
+            </div>
+            <div class="form-group col-3">
+              <label for="exampleSelectGender">Category</label>
+
+              <select class="form-control " style="color: white" name="categoryName" id="exampleSelectGender" >
+                {{#each catData}}
+                <option style="color: white">{{this.categoryName}} </option>
+                {{/each}}
+
+              </select>
+
+            </div>
+            <div class="form-group col-3 mb-3">
+              <label for="exampleInputPassword1" class="form-label">stock</label>
+              {{!-- <input type="text" class="form-control" id="exampleInputPassword1" name="status"> --}}
+              <select class="form-select" aria-label="Default select example" name="stock">
+                <option selected value="select">{{data.stock}}</option>
+                <option value="In Stock">In Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
+              
+            </div>
+            <div class="form-group">
+              <label for="form-control-file">Image</label><br>
+              <div id="imgContainer">
+                {{!-- {{#each data.image}}
+                <img src="/images/{{this}}" id="img" style="width: 10vh; height: 10vh;">
+                {{/each}} --}}
+                {{!-- {{#each data.image}}  --}}
+                <img src="/images/{{data.image.[0]}}" style="width: 10vh;height: 10vh;"id="img1" data-index="0">  
+                  <img src="/images/{{data.image.[1]}}" style="width: 10vh;height: 10vh;"id="img2"  data-index="1">  
+                    <img src="/images/{{data.image.[2]}}" style="width: 10vh;height: 10vh;"id="img3" data-index="2">  
+               
+          
+              </div>
+               <input type="file" name="images" onchange="getImage(event)" class="form-control-file mt-2" id="Image" multiple>
+              
+           
+            <div class="form-group col-5">
+              <label for="exampleInputCity1">Price</label>
+              <input type="number" style="color: white" name="price" class="form-control" id="exampleInputCity1"
+                placeholder="Amount" required="" value="{{data.price}}">
+            </div>
+            <div class="form-group col-5">
+              <label for="exampleFormControlTextarea1">Product Description</label>
+              <input type="text" class="form-control" style="color: white" name="description"
+                id="exampleFormControlTextarea1" rows="3" required="" value="{{data.description}}"></textarea>
+                <input type="hidden" value="{{data._id}}" name="id">
+            </div>
+
+            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+            <button class="btn btn-light">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+<script>
+  function getImage(event) {
+  // Get the selected files from the input
+  const files = event.target.files;
+
+  // Iterate over the files and create an object URL for each file
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const objectURL = URL.createObjectURL(file);
+
+    // Find the corresponding <img> tag and update its src attribute
+    const index = i % 3; // loop back to the first image if more than three are selected
+    const img = document.querySelector(`#img${index + 1}`);
+    img.src = objectURL;
+  }
+}
+  
+</script>
+
+
+
+{{>footer}}
+
+
+

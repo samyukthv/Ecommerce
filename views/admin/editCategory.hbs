@@ -1,0 +1,79 @@
+{{>navbar}}
+
+
+<div style="display: flex;">
+{{>sidebar}}
+
+<div style="margin-top: 70px; margin-left: 10%; width: 80%">
+  <form action="/admin/updateCategory" enctype="multipart/form-data" method="post">
+    <div class="mb-3">
+      <label class="form-label" style="border-radius: 5px;">Category Name</label>
+      <input type="text" style="border-radius: 5px; width: 100%; padding: 10px;" id="form3Example1c" class="form-control" name="categoryName" value="{{data.categoryName}}" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <input type="text" style="border-radius: 5px; width: 100%; padding: 10px;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="description" value="{{data.description}}" required>
+      <input type="hidden" value="{{data._id}}" name="id">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Stock</label>
+      <select class="form-select" aria-label="Default select example" name="stock" style="border-radius: 5px; width:20%; padding: 10px; background-color: #000000; font-family: Arial; color: white;" value="">
+        {{!-- <option selected>{{data.status}}</option> --}}
+        <option value="In Stock">In Stock</option>
+        <option value="Out of Stock">Out of Stock</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Image</label>
+      <div style="display: flex; align-items: center;">
+        <img src="/images/{{data.image}}" style="width: 10vh;height: 10vh; margin-right: 10px;" id="imgView">
+        <input type="file" name="image" style="margin-bottom: 50px;" onchange="viewImage(event)" class="form-control-file mt-2" id="image" multiple>
+      </div>
+    </div>
+
+    {{#if categorystatus}}
+    <div class="alert alert-danger text-center mb-3">{{categorystatus}}</div>
+    {{/if}}
+
+    <button type="submit" class="btn btn-primary" style="border-radius: 5px; padding: 10px;">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+{{>footer}}
+
+
+ 
+
+
+
+
+
+
+
+<script>
+  function viewImage(event) {
+    document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

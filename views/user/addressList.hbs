@@ -1,0 +1,100 @@
+{{>userHeader}}
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Address List</h2>
+                        <p>Home <span>-</span>Address List</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!--================End Home Banner Area =================-->
+
+<section style="background-color: #ecfdff">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLlnTa1_hvfsAbfb9EH7UlbrgkufjBlwEXIw&usqp=CAU"
+                            alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+
+
+                        {{#each userdt}}
+                        <h5 class="my-3">{{this.firstname}}</h5>
+
+                        <p class="text-muted mb-4">{{this.email}}</p>
+                        <div class="d-flex justify-content-center mb-2">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        {{#each this.address}}
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 mt-3">Address {{inc @index}} :</p>
+                            </div>  
+                            <hr>
+                            {{!-- {{#each userdt.address.[]}} --}}
+                            <div class="col-sm-9  my-3">
+                               
+                                <p class="text-muted mb-0 col-md-8" style="display: inline-block;">
+                                    {{this.street}},{{this.district}},
+                                    {{this.state}},{{this.country}},{{this.pincode}}
+                                </p>
+                                
+                                {{!-- <a href="/backToUserProfile" class="ml-4"><button type="button"
+                                        class="btn btn-primary">edit address</button></a>
+                                <a href="/backToUserProfile"><button type="button" class="btn btn-primary">delete
+                                        address</button></a> --}}
+                                <div class="dropdown" style="display: inline-block;" >
+                                    <a class="dropdown-toggle hidden-arrow" type="button" id="dropdownMenuicon"
+                                        data-mdb-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-lg text-dark"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon">
+                                        <li><a class="dropdown-item" href="/editAddress/{{this._id}}"> <i></i>edit</a></li>
+                                        <li><a class="dropdown-item" href="/deleteAddress/{{this._id}}"> <i></i>delete</a></li>
+                                       
+                                    </ul>
+                                </div>
+                                <hr>
+                               
+                            </div> 
+                            {{!-- {{/each }} --}}
+                        </div>
+
+                    {{/each}}
+
+                    </div>
+                </div>
+                <a href="/UserProfile"><button type="button" style="background-color: #ff3368 ;" class="btn_3">Back</button></a>
+
+            </div>
+
+            {{/each}}
+
+</section>
+
+
+
+
+{{>userFooter}}

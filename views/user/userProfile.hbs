@@ -1,0 +1,138 @@
+
+
+{{>userHeader}}
+<!-- breadcrumb start-->
+  <section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <h2>User Profile</h2>
+              <p>Home <span>-</span>User Profile</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb start-->
+  <!--================End Home Banner Area =================-->
+
+<section style="background-color: #ecfdff">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+       
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLlnTa1_hvfsAbfb9EH7UlbrgkufjBlwEXIw&usqp=CAU" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+
+
+              {{#each userdt}}
+            <h5 class="my-3">{{this.firstname}}</h5>
+            
+            <p class="text-muted mb-4">{{this.email}}</p>
+            <div class="d-flex justify-content-center mb-2">
+            
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Full Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.firstname}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.email}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">mobile</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.mobile}}</p>
+              </div>
+            </div>
+            
+            
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0"> Permanent Address</p>
+              </div>
+
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{this.address.[0].street}},{{this.address.[0].district}}, {{this.address.[0].state}},{{this.address.[0].country}},{{this.address.[0].pincode}}</p>
+                
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <a href="/editUserProfile">
+  <button type="button" class="btn btn-primary">Edit Profile</button>
+</a>
+
+<a href="/AddAddress">
+  <button type="button" class="btn btn-primary">Add Address</button>
+</a>
+
+<a href="/addressList">
+  <button type="button" class="btn btn-primary">View Address List</button>
+</a>
+
+<a href="/orderDetails">
+  <button type="button" class="btn btn-primary">My Orders</button>
+</a>
+      </div>
+    </div>
+  </div>
+{{/each}}
+  
+</section>
+
+
+<style>
+  .btn-primary {
+  background-color: #ff3368;
+  border-color: #ff3368;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #d62850;
+  border-color: #d62850;
+  color: #fff;
+}
+
+.btn {
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 10px 25px;
+  margin-right: 10px;
+}
+</style>
+
+{{>userFooter}}

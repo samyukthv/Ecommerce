@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>aranoz</title>
+    <link rel="icon" href="/assetuser/img/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assetuser/css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="/assetuser/css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="/assetuser/css/owl.carousel.min.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="/assetuser/css/all.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="/assetuser/css/flaticon.css">
+    <link rel="stylesheet" href="/assetuser/css/themify-icons.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="/assetuser/css/magnific-popup.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="/assetuser/css/slick.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="/assetuser/css/style.css">
+</head>
+
+<body
+    <!--::header part start::-->
+  
+{{>userHeader}}
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Register</h2>
+                            <p>Home <span>-</span>Register</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================login_part Area =================-->
+    <section class="login_part padding_top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_text text-center">
+                        <div class="login_part_text_iner">
+                            <h2>already have an account?</h2>
+                            <p>Please login in if you already have an account</p>
+                            <a href="/login" class="btn_3">Login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner">
+                            <h3> Please register using the form</h3>
+                                       {{#if userstatus}}
+                              <div class="alert alert-danger text-center mb-3">{{userstatus}}</div>
+                                 {{/if}}
+                            <form class="row contact_form" action="/userRegister" method="post">
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="firstname" name="firstname" value=""
+                                        placeholder="first name" >
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="lastname" name="lastname" value=""
+                                        placeholder="last name"  > 
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="mobile" name="mobile" value=""
+                                        placeholder="mobile number">
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="password" name="password" value=""
+                                        placeholder="Password">
+                                </div>
+                                 <div class="col-md-12 form-group p_star">
+                                    <input type="email" class="form-control" id="email" name="email" value=""
+                                        placeholder="email">
+                                </div>
+                              
+                                
+                                    <button type="submit" value="submit" class="btn_3">
+                                        sign up
+                                    </button>
+                             
+                                </div>
+                               
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================login_part end =================-->
+{{>userFooter}}
+
+<script>
+    // Get the form element
+    const form = document.querySelector('.contact_form');
+
+    // Add an event listener to the form submit event
+    form.addEventListener('submit', (event) => {
+        // Prevent the form from submitting
+        event.preventDefault();
+
+        // Get the form input values
+        const firstname = document.querySelector('#firstname').value.trim();
+        const lastname = document.querySelector('#lastname').value.trim();
+        const mobile = document.querySelector('#mobile').value.trim();
+        const password = document.querySelector('#password').value.trim();
+        const email = document.querySelector('#email').value.trim();
+
+        // Define a regular expression to validate the email address
+        const emailRegex = /^\S+@\S+\.\S+$/;
+
+        // Define a regular expression to validate the mobile number
+        const mobileRegex = /^[0-9]{10}$/;
+
+        // Validate the form input values
+        if (firstname === '') {
+            alert('Please enter your first name.');
+            return;
+        }
+
+        if (lastname === '') {
+            alert('Please enter your last name.');
+            return;
+        }
+
+        if (mobile === '') {
+            alert('Please enter your mobile number.');
+            return;
+        } else if (!mobileRegex.test(mobile)) {
+            alert('Please enter a valid 10-digit mobile number.');
+            return;
+        }
+
+        if (password === '') {
+            alert('Please enter your password.');
+            return;
+        }
+
+        if (email === '') {
+            alert('Please enter your email address.');
+            return;
+        } else if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        // Submit the form if all the input values are valid
+        form.submit();
+    });
+</script>
