@@ -2,53 +2,170 @@
 
 
 <div style="display: flex;">
-{{>sidebar}}
+  {{>sidebar}}
 
-<div style="margin-top: 70px; width:100%">
+  <div style="margin-top: 70px; width:100%">
 
 
 
- <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title" style="text-align: center; font-size: 28px; font-weight: bold; color: #aef7f8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Order List</h4>
-                   
-                    <div class="table-responsive">
-                      <table class="table table-striped" id="Table" style="color: white;">
-                        <thead>
-                          <tr style="height: 50px;">
-                            <th>S.No </th>
-                            <th>User Name</th>
-                            <th>orderId</th>
-                            <th>Status</th>
-                            <th>Total Bill</th>
-                            <th>Order Details</th>
-                           
-                          </tr>
-                        </thead>
-                        <tbody>
-                              {{#each orderfind}} 
-                          <tr style="height: 50px;">
-                            <td class="py-1">
-                             {{inc @index}}
-                            </td>
-                            <td>{{userId.firstname}}</td>
-                            <td>{{this.orderId}}</td>
-                            <td>{{this.status}}</td>
-                            <td>{{this.total}}</td>
-                            {{log this._id}}
-                            <td><a href="/admin/viewOrder/{{this._id}}"><button class="btn-primary"  style="height: 30px;">view details</button></a></td>
-                    
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title"
+            style="text-align: center; font-size: 28px; font-weight: bold; color: #aef7f8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">
+            Order List</h4>
 
-                          </tr>
-                         {{/each}}  
-                        </tbody>
-                      </table>
+          <div class="table-responsive">
+            <table class="table table-striped" id="Table" style="color: white;">
+              <thead>
+                <tr style="height: 50px;">
+                  <th>S.No </th>
+                  <th>User Name</th>
+                  <th>orderId</th>
+                  <th>Order Type</th>
+                  <th>Status</th>
+                  <th>Total Bill</th>
+                  <th>Order Details</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {{#each orderfind}}
+                <tr style="height: 50px;">
+                  <td class="py-1">
+                    {{inc @index}}
+                  </td>
+                  <td>{{userId.firstname}}</td>
+                  <td>{{this.orderId}}</td>
+                  <td>{{this.paymentType}}</td>
+                  <td>
+
+                    <div class="btn-group">
+
+                      <span id="boot-icon" class="bi bi-three-dots-vertical dropdown-toggle"
+                        style="font-size: 15px; color: rgb(255, 0, 0); -webkit-text-stroke-width: 0.9px; opacity: 1;"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
+ 
+
+                      {{!-- {{#if this.status=="confirmed"}}  --}}
+
+
+
+
+                      <div class="dropdown-menu">
+
+                        <div class="dropdown-item" onclick="dropdown('{{this._id}}','Pending')"> <span
+                           >Pending</span></div>
+                        <div class="dropdown-item" onclick="dropdown('{{this._id}}','processing')"><span
+                            >processing</span></div>
+                        <div class="dropdown-item" onclick="dropdown('{{this._id}}','shipped')"><span
+                            >shipped</span></div>
+                        <div class="dropdown-item" onclick="dropdown('{{this._id}}','delivered')"><span
+                           >delivered</span></div>
+                        <div class="dropdown-divider"></div>
+
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                    {{!-- {{/if}}  --}}
+{{!-- 
+                    {{#if this.status==="pending"}}
 
 
-              
+
+
+                    <div class="dropdown-menu">
+
+
+                      <div class="dropdown-item" onclick="dropdown('{{this._id}}','processing')"><span
+                          >processing</span></div>
+                      <div class="dropdown-item" onclick="dropdown('{{this._id}}','shipped')"><span
+                          >shipped</span></div>
+                      <div class="dropdown-item" onclick="dropdown('{{this._id}}','delivered')"><span
+                         >delivered</span></div>
+                      <div class="dropdown-divider"></div>
+
+                    </div>
+          </div>
+          {{/if}}
+
+          {{#if this.status==="processing"}}
+
+
+
+
+          <div class="dropdown-menu">
+
+
+            <div class="dropdown-item" onclick="dropdown('{{this._id}}','shipped')"><span
+                >shipped</span></div>
+            <div class="dropdown-item" onclick="dropdown('{{this._id}}','delivered')"><span
+                >delivered</span></div>
+            <div class="dropdown-divider"></div>
+
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if this.status==="shipped"}}
+
+
+
+
+        <div class="dropdown-menu">
+
+
+          <div class="dropdown-item" onclick="dropdown('{{this._id}}','delivered')"><span
+             >delivered</span></div>
+          <div class="dropdown-divider"></div>
+
+        </div>
+      </div>
+      {{/if}} --}}
+
+      <span id="{{this._id}}">{{this.status}}</span>
+
+
+
+      </td>
+      <td>{{this.total}}</td>
+      {{log this._id}}
+      <td><a href="/admin/viewOrder/{{this._id}}"><button class="btn-primary" style="height: 30px;">view
+            details</button></a></td>
+
+
+      </tr>
+      {{/each}}
+      </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<script>
+  function dropdown(orderId, status) {
+    $.ajax({
+      url: '/admin/orderStatus',
+      data: {
+        orderId: orderId,
+        status: status
+      },
+      method: "post",
+      success: (response) => {
+        console.log(response);
+        document.getElementById(orderId).innerHTML = response.status
+        location.href = '/admin/orderList'
+      }
+
+    })
+  }
+</script>
+
+
+
 {{>footer}}

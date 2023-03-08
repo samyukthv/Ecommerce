@@ -1,6 +1,6 @@
 var express = require('express');
 const app=require('../index')
-const { adminLog, loadLogin, adminHome, adminLogout,  userList, blockUser, unblockUser, orderList, viewDetails, vieworder, displayCoupon, addCoupon, insertCoupon, deleteCoupon } = require('../controller/adminController');
+const { adminLog, loadLogin, adminHome, adminLogout,  userList, blockUser, unblockUser, orderList, viewDetails, vieworder, displayCoupon, addCoupon, insertCoupon, deleteCoupon, blockCoupon, unblockCoupon, editCoupon, updateCoupon, orderStatus } = require('../controller/adminController');
 const upload= require('../multer')
 var admin_router = express.Router();
 const adminAuth=require('../middlerware/adminAuth');
@@ -36,8 +36,14 @@ admin_router.get('/addProduct',adminAuth.isLogin,productController.loadAddProduc
 admin_router.get('/productList',adminAuth.isLogin,productController.listProduct)
 admin_router.get('/blockProduct/:id',adminAuth.isLogin,productController.blockProduct)
 admin_router.get('/unblockProduct/:id',adminAuth.isLogin,productController.unblockProduct)
-admin_router.get('/editProduct' ,adminAuth.isLogin,productController.editProduct)
 
+admin_router.get('/blockCoupon/:id',adminAuth.isLogin,blockCoupon)
+admin_router.get('/unblockCoupon/:id',adminAuth.isLogin,unblockCoupon)
+
+
+admin_router.get('/editProduct' ,adminAuth.isLogin,productController.editProduct)
+admin_router.get('/editCoupon/:id',adminAuth.isLogin,editCoupon)
+admin_router.post('/updateCoupon/:id',adminAuth.isLogin,updateCoupon)
 
 admin_router.post('/updateProduct/:id',upload.array('images',3),productController.updateProduct)
 
@@ -55,9 +61,9 @@ admin_router.get('/viewOrder/:id', adminAuth.isLogin,vieworder)
  admin_router.get('/couponList',adminAuth.isLogin,displayCoupon)
  admin_router.get('/addCoupon',adminAuth.isLogin,addCoupon)
 
- admin_router.post('/addCoupon',insertCoupon)
+ admin_router.post('/addCoupon',adminAuth.isLogin,insertCoupon)
 
- admin_router.get('/deleteCoupon/:id',deleteCoupon)
+ admin_router.post('/orderStatus',adminAuth.isLogin,orderStatus)
 
 
 

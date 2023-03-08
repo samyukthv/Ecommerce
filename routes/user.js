@@ -40,7 +40,7 @@ router_user.post('/resetPassword',isLogout,userController.resetPassword)
 
 
 // router_user.get('/products',userController.loadProducts)
-router_user.get('/singleProduct',  userController.loadSingleProduct)
+router_user.get('/singleProduct/:id',  userController.loadSingleProduct)
 router_user.post('/userRegister',userController.doSignup)
 router_user.post('/otpVerify',userController.otpCompare)
 router_user.post('/login',userController.userLogin)
@@ -85,9 +85,18 @@ router_user.get('/UserProfile',isLogin,userController.userProfile)
 
 
 router_user.get('/checkOut',isLogin,userController.checkOut)
-router_user.post('/checkoutAddress',userController.checkoutaddress)
+router_user.post('/checkoutAddress',isLogin,userController.checkoutaddress)
 
-router_user.post('/orderConfirmation',userController.orderConfirmation)
+
+
+router_user.post('/placeOrder',isLogin,userController.toPayment)
+router_user.get('/orderConfirmed',isLogin,userController.orderConfirm)
+
+
+
+router_user.post('/verifyPayment',isLogin,userController.verifyPayment)
+
+
 router_user.get('/orderConfirmation',isLogin,userController.loadorderConfirmation)
 router_user.get('/orderDetails',isLogin,userController.loadMyOrders)
 
@@ -97,6 +106,12 @@ router_user.get('/cancelOrder/:id',isLogin,userController.cancelOrder)
 router_user.get('/orderDetails/:id',isLogin,userController.orderDetails)
 
 
-router_user.post('/checkCoupon/:id',userController.applyCoupon)
+router_user.post('/checkCoupon/:id',isLogin,userController.applyCoupon)
+
+
+
+router_user.get('/editCheckoutAddress/:id',isLogin,userController.editCheckoutAddress)
+
+router_user.post('/addReview/:id',isLogin,userController.addReview)
 
 module.exports = router_user;

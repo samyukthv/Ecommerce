@@ -95,7 +95,7 @@ function alerted(proId) {
         method: 'get',
         success: (response) => {
           Swal.fire({
-            title: 'Product hided successfully',
+            text: 'Product hided successfully',
             icon: 'success',
             showConfirmButton: false
           })
@@ -135,7 +135,7 @@ function alerted(proId) {
         success: (response) => {
           if (result.isConfirmed) {
             Swal.fire({
-             title: "product is unhided",
+             text: "product is unhided",
               icon: 'success',
               
               showConfirmButton: false,

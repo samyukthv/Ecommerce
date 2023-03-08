@@ -11,6 +11,11 @@ const loadAddCategory = async (req, res) => {
       console.log(error.message);
     }
   };
+
+
+
+
+
   //add new category
   
   const addNewCategory = async (req, res, next) => {
@@ -18,7 +23,7 @@ const loadAddCategory = async (req, res) => {
     console.log(category);
     category.categoryName = category.categoryName
       .split(" ")
-      .join("_")
+      .join(" ")
       .toLowerCase();
     let categorydb = await Category.findOne({
       categoryName: category.categoryName,
@@ -33,13 +38,17 @@ const loadAddCategory = async (req, res) => {
       }
     } else {
       category.image = req.file.filename;
-  
       const data = new Category(category);
       data.save();
       res.render("admin/addCategory", { layout: "admin_layout" });
     }
   };
   
+
+
+
+
+
   //list category
   
   const listCategory = async (req, res, next) => {
@@ -54,6 +63,10 @@ const loadAddCategory = async (req, res) => {
       });
   };
   
+
+
+
+
   //edit category
   
   const editCategory = async (req, res) => {
@@ -68,11 +81,14 @@ const loadAddCategory = async (req, res) => {
     }
   };
   
+
+
+
+
   //update category
   
   const updateCategory = async (req, res) => {
     const category = req.body;
-    console.log(category);
     category.categoryName = category.categoryName
       .split(" ")
       .join("_")
@@ -83,7 +99,6 @@ const loadAddCategory = async (req, res) => {
         { categoryName: category.categoryName },
       ],
     });
-    console.log(categorydb);
     if (categorydb) {
       if (categorydb.categoryName == category.categoryName) {
         res.render("admin/addCategory", {
@@ -93,7 +108,6 @@ const loadAddCategory = async (req, res) => {
       }
     } else {
       try {
-        console.log(req.body,5433);
         if(req.file){
           await Category.updateOne(
             { _id: req.body.id },
@@ -131,6 +145,11 @@ const loadAddCategory = async (req, res) => {
       }
     }
   };
+  
+
+
+
+
   
   //delete category
   

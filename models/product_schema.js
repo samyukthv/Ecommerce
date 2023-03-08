@@ -42,6 +42,10 @@ var productschema = new Schema({
        required:true
 
     },
+    review:[{
+        userName:{type:String},
+        message:{type:String},
+    }],
 
     inserted_at:{
         type:Date,

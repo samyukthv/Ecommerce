@@ -13,8 +13,8 @@
 
 <div style="margin-top: 100px; width:100%">
 
-<h4 class="card-title" style="text-align: center; font-size: 28px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Coupon List</h4>
-
+<h4 class="card-title" style="text-align: center; font-size: 28px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Add Coupon </h4>
+{{!-- 
 <form class="coupon-form" method="post" action="/admin/addCoupon">
   <div class="form-group">
     <label for="couponId"  style="    color: black;">Coupon ID:</label>
@@ -42,7 +42,65 @@
   </div>
 
   <button class="submit-btn" type="submit">Create Coupon</button>
-</form>
+</form> --}}
+
+
+
+
+
+ <div class="col-md-6 grid-margin stretch-card" style="margin-left: 20%;">
+                <div class="card">
+                  <div class="card-body">
+                    
+                    
+                    <form class="forms-sample"  method="post" action="/admin/addCoupon">
+                      <div class="form-group row">
+                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Coupon ID:</label>
+                        <div class="col-sm-9">
+                          
+                          <input type="text" class="form-control" id="exampleInputUsername2" name="couponId" placeholder="coupon code" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Discount</label>
+                        <div class="col-sm-9">
+                          <input type="number" class="form-control" name="discount" id="exampleInputEmail2" placeholder="Discount" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputMobile" class="col-sm-3 col-form-label">Minimum Purchase</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="exampleInputMobile" name="minPurchase" placeholder="Minimmum purchase">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Maximum Limit</label>
+                        <div class="col-sm-9">
+                           
+                          <input type="number" class="form-control" name="maxLimit" id="exampleInputPassword2" placeholder="Maximum limit" >
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Expiry date</label>
+                        <div class="col-sm-9">
+                         
+                          <input type="date" class="form-control" name="expDate" id="exampleInputConfirmPassword2" placeholder="exp date" required>
+                        </div>
+                      </div>
+                     
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
 
 
 
@@ -51,59 +109,6 @@
 
 
 
-<style>
-    .coupon-form {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color:#ffffff;
-
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-label {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"] {
-  padding: 10px;
-  
-  border: none;
-  background-color: #c1bebe;
-  font-size: 1rem;
-  box-shadow: none;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="date"]:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.submit-btn {
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: #020c0c;
-  color: #fff;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background-color: #006666;
-}
-</style>
 
 
 

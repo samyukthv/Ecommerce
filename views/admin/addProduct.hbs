@@ -72,5 +72,32 @@
       }
     </style>
 
+<script>
+  // Get the form element
+const form = document.querySelector('form');
+
+// Add an event listener to the form's submit button
+form.addEventListener('submit', (event) => {
+  // Get all the input fields in the form
+  const inputs = form.querySelectorAll('input, select, textarea');
+
+  // Loop through each input field
+  for (let input of inputs) {
+    // Trim the value of the input field
+    const trimmedValue = input.value.trim();
+
+    // If the trimmed value is empty or contains only whitespace characters, prevent the form from submitting and show an error message
+    if (!trimmedValue) {
+      event.preventDefault();
+      alert(`${input.name} is required.`);
+      return;
+    }
+  }
+});
+
+</script>
+
+
+
 
 {{>footer}}

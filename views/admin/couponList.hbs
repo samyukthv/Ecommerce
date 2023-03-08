@@ -23,8 +23,11 @@
                                     <th>Coupon Code</th>
                                     <th>Added Date</th>
                                     <th>Discount percent</th>
-                                    <th>Status</th>
+                                   
                                     <th>Expire Date</th>
+                                    <th>min Purchase</th>
+                                    <th>max limit</th>
+                                     <th>Status</th>
                                     <th></th>
 
 
@@ -39,18 +42,27 @@
                                     <td>{{this.couponId}}</td>
                                     <td>{{ formatDate this.addDate}}</td>
                                     <td>{{this.discount}}</td>
-                                    <td>{{this.status}}</td>
+                                    
                                     <td>{{formatDate this.expDate}}</td>
+                                    <td>{{this.minPurchase}}</td>
+                                    <td>{{this.maxLimit}}</td>
+                                    <td>{{this.status}}</td>
                                     <td>
-                                        <a>
-                                            <span class="me-3" onclick="alerted('{{this._id}}')">
-                                                <i class="fa-solid fa-trash-alt"></i>
-                                            </span>
-                                        </a>
-                                        {{!-- <a><button type="button" class="btn btn-primary">hy</button></a> --}}
-                                        <a class="ml-3" style="margin-left: 10px;" href="{{this._id}}">
-                                            <i class="fa-solid fa-edit"></i>
-                                        </a>
+                                        {{#if this.status}}
+
+                                        <button style="height: 40px; margin-right: 20px;" class="btn btn-primary "
+                                            onclick="alerted('{{this._id}}')">block</button>
+
+                                        {{else}}
+
+                                        <button style="height: 40px; margin-right: 20px;" onclick="alertedUndo('{{this._id}}')"
+                                            class="btn btn-primary">unblock</button>
+
+
+                                        {{/if}}
+
+
+                                       <a href="/admin/editCoupon/{{this._id}}"> <button style="height: 40px;" class="btn btn-primary"    >Edit</button></a>
                                     </td>
 
                                 </tr>
@@ -66,29 +78,64 @@
 
         <script>
 
-         
-  function alerted(proId) {
+
+function alerted(cId) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "you want to block the coupon",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, blocked it'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/blockCoupon/' + cId,
+        method: 'get',
+        success: (response) => {
+          Swal.fire({
+            text: 'coupon blocked successfully',
+            icon: 'success',
+            showConfirmButton: false
+          })
+          setTimeout(() => {
+            location.reload()
+          }, 800)
+        },
+        
+      })
+    }
+  })
+}
+
+
+
+
+
+function alertedUndo(cId) {
+    
     Swal.fire({
-     
       title: 'Are you sure?',
-      text: "you want to delete this coupon permanently",
+      text: "you want to unblock the coupon",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes,blocked it'
+      confirmButtonText: 'Yes, unblock  it!'
+     
     }).then((result) => {
-
+      
       $.ajax({
-
-        url: '/admin/deleteCoupon/' + proId,
+        
+        url: '/admin/unblockcoupon/' + cId,
         method: 'get',
         success: (response) => {
           if (result.isConfirmed) {
-            console.log("hellooooooooooooooooooo")
-           Swal.fire({
+            Swal.fire({
+             text: "coupon is unblocked",
               icon: 'success',
-              title: 'category deleted successfully',
+              
               showConfirmButton: false,
             })
             setTimeout(() => {
@@ -97,10 +144,9 @@
           }
         }
       })
-
+      event.preventDefault();
     })
   }
-
 
 
         </script>

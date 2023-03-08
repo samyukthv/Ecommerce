@@ -1,6 +1,5 @@
 const express=require('express')
-
-const dotenv=require('dotenv').config()
+ const dotenv=require('dotenv').config()
 var userRouter = require("./routes/user");
  var logger = require("morgan");
 var adminRouter = require("./routes/admin");
@@ -57,7 +56,7 @@ app.engine(
 connectdb.connection();
 
 app.use(nocache())
- app.use(logger("dev"));
+  app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -66,6 +65,39 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 app.use("/", userRouter);
 app.use("/admin", adminRouter);
+
+
+
+
+
+
+handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+  switch (operator) {
+      case '==':
+          return (v1 == v2) ? options.fn(this) : options.inverse(this);
+      case '===':
+          return (v1 === v2) ? options.fn(this) : options.inverse(this);
+      case '!=':
+          return (v1 != v2) ? options.fn(this) : options.inverse(this);
+      case '!==':
+          return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+      case '<':
+          return (v1 < v2) ? options.fn(this) : options.inverse(this);
+      case '<=':
+          return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+      case '>':
+          return (v1 > v2) ? options.fn(this) : options.inverse(this);
+      case '>=':
+          return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+      case '&&':
+          return (v1 && v2) ? options.fn(this) : options.inverse(this);
+      case '||':
+          return (v1 || v2) ? options.fn(this) : options.inverse(this);
+      default:
+          return options.inverse(this);
+  }
+});
 
 
 //s.no in the admin table

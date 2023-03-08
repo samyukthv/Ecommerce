@@ -16,10 +16,7 @@ const loadAddProduct = async (req, res) => {
 
 const addProduct = async (req, res) => {
   const product = req.body;
-
   const category= await Category.findOne({categoryName:req.body.categoryName})
-  
-  console.log(product);
   const imageName = [];
   for (file of req.files) {
     imageName.push(file.filename);
@@ -28,9 +25,10 @@ const addProduct = async (req, res) => {
   product.categoryId=category._id
   const products = new Product(product);
   products.save();
-  console.log(products);
   res.render("admin/addProduct", { layout: "admin_layout" });
 };
+
+
 
 
 
@@ -39,9 +37,6 @@ const addProduct = async (req, res) => {
 const listProduct = async (req, res, next) => {
   try {
     const data= await Product.find({}).populate('categoryId').lean()
-     console.log(data);
-    
-      
       res.render("admin/productList", { layout: "admin_layout", data });
   } catch (error) {
     res.status(400).json({ messageError: error });
@@ -60,13 +55,17 @@ const blockProduct = async (req, res) => {
     await Product.updateOne({ _id: id }, { status: false });
     Product.find({})
       .lean()
-      
         res.render("admin/productList", { layout: "admin_layout" });
-   
   } catch (error) {
     console.log(error.message);
   }
 };
+
+
+
+
+
+
 
 const unblockProduct = async (req, res) => {
   try {
@@ -74,20 +73,23 @@ const unblockProduct = async (req, res) => {
     await Product.updateOne({ _id: id }, { status: true });
     Product.find({})
       .lean()
-     
         res.render("admin/productList", { layout: "admin_layout" });
-
   } catch (error) {
     console.log(error.message);
   }
 };
+
+
+
+
+
+
 
 const editProduct = async (req, res) => {
   try {
     const id = req.query.id;
     const data = await Product.findById({ _id: id }).lean();
     const catData = await Category.find({}).lean();
-    //   console.log(data)
     if (data) {
       res.render("admin/editProduct", {
         layout: "admin_layout",
@@ -102,20 +104,17 @@ const editProduct = async (req, res) => {
 
 
 
+
+
+
 const updateProduct = async (req, res) => {
   try {
 
    const  category =await Category.findOne({categoryName:req.body.categoryName})
-
-console.log(category);
-
-
-console.log(req.files);
     const imageName = [];
     for (file of req.files) {
       imageName.push(file.filename);
     }
-    console.log(imageName);
     if (req.files) {
       await Product.updateOne(
         { _id: req.params.id },
@@ -152,6 +151,12 @@ console.log(req.files);
     console.log(error.message);
   }
 };
+
+
+
+
+
+
 
 module.exports = {
   loadAddProduct,

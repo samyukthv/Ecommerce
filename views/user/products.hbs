@@ -64,14 +64,14 @@
 
     {{>userHeader}}
     <!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
+    <section class="breadcrumb breadcrumb_bg" >
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>Shop Category</h2>
-                            <p>Home <span>-</span> Shop Category</p>
+                            <h2>Products</h2>
+                            <p>Home <span>-</span>Products</p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
     <!-- breadcrumb start-->
 
     <!--================Category Product Area =================-->
-    <section class="cat_product_area section_padding">
+    <section class="cat_product_area section_padding" style="padding-top: 70px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -98,7 +98,8 @@
                                 <ul class="list">
                                     {{#each category1}}
                                     <li>
-                                        <a href="/categoryFilter/{{this._id}}"> {{categoryName}}</a>
+                                        <a style="font-weight: 700 ; text-transform: uppercase;"
+                                            href="/categoryFilter/{{this._id}}"> {{categoryName}}</a>
 
                                     </li>
                                     {{/each}}
@@ -212,43 +213,20 @@
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-12">
+                            <form>
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
-                                {{!-- <div class="single_product_menu">
-                                    <p><span>10000 </span> Prodict Found</p>
-                                </div> --}}
-                                {{!-- <div class="single_product_menu d-flex">
-                                    <h5>short by : </h5>
-                                    <select>
-                                        <option data-display="Select">name</option>
-                                        <option value="1">price</option>
-                                        <option value="2">product</option>
-                                    </select>
-                                </div> --}}
-                                {{!-- <div class="single_product_menu d-flex">
-                                    <h5>show :</h5>
-                                    <div class="top_pageniation">
-                                        <ul>
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                        </ul>
+                                
+                               
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control " style="height: 50px;"
+                                            placeholder="search products">
+                                        <div class="input-group-append"><button type="submit" class="btn btn_3"><i
+                                                    class="fas fa-search"></i></button></div>
                                     </div>
-                                </div> --}}
-                                {{!-- <div class="single_product_menu d-flex">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="search"
-                                            aria-describedby="inputGroupPrepend">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i
-                                                    class="ti-search"></i></span>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <div class="search-bar">
-                                    <input type="text" placeholder="Search...">
-                                </div>
+                               
 
                             </div>
+                            </form>
                         </div>
                     </div>
 
@@ -260,7 +238,7 @@
                                 <div class="single_product_text  col-md-12">
                                     <h4>{{this.productName}}</h4>
                                     <h3>${{this.price}}</h3>
-                                    <a href="/singleProduct?id={{this._id}}"
+                                    <a href="/singleProduct/{{this._id}}"
                                         style="text-decoration: none; font-size: 16px; margin-left: 5px; color: blue;">View
                                         More</a>
                                     <div class="d-flex">
@@ -385,7 +363,7 @@
     <!--================End Category Product Area =================-->
 
     <!-- product_list part start-->
-    <section class="product_list best_seller">
+    {{!-- <section class="product_list best_seller">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -436,26 +414,25 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- product_list part end-->
 
 
 
 
-<style>
-    .search-bar {
-  width: 100%;
-  border-bottom: 1px solid black;
-}
+    <style>
+        .search-bar {
+            width: 100%;
+            border-bottom: 1px solid black;
+        }
 
-.search-bar input {
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: 20px;
-  padding: 10px;
-}
-
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 20px;
+            padding: 10px;
+        }
     </style>
 
 
