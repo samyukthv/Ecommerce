@@ -37,7 +37,7 @@
 
   {{>userHeader}}
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg" style="height: 350px;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -130,10 +130,7 @@
             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
               aria-selected="false">Comments</a>
           </li> --}}
-          <li class="nav-item">
-            <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
-              aria-controls="review" aria-selected="false">Reviews</a>
-          </li>
+         
         </ul>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -317,8 +314,8 @@
                 {{#each reviews}}
 
                   <div class="review_item">
-                     <h6>{{userName}}</h6>
-                    <p>
+                     <h6 style="margin-bottom: 0px;">{{userName}}</h6>
+                    <p style="margin-top: 0px;">
                       {{message}}
                     </p>
                   </div>

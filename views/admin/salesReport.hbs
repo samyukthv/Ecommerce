@@ -1,0 +1,133 @@
+{{>navbar}}
+
+
+<div style="display: flex;">
+    {{>sidebar}}
+{{!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+            <script type="text/javascript" charset="utf8"
+                src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script> --}}
+
+
+
+
+    <div style="margin-top: 85px; width:100%">
+
+  <h4 class="card-title"
+            style="text-align: center; font-size: 28px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">
+            SALES REPORTS</h4>
+
+
+<div style="margin-top: 40px;">
+<form action="/admin/generateReport" method="post">
+  <label for="start-date">Start Date</label>
+  <input type="date" id="startDate" name="startDate">
+
+  <label for="end-date">End Date</label>
+  <input type="date" id="endDate" name="endDate">
+<button type="submit" class="btn btn-outline-primary" style=" margin-left: 20px;"  >Generate Report</button>
+ {{!-- <button class="btn btn-primary" type="submit"
+          style="font-size:10px; margin-left: 20px; padding: 10px 40px;">Generate Report</button> --}}
+</form>
+</div>
+
+{{#if orders}}
+
+     <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4  class="card-title text-center ">Sales Report Table</h4>
+                      <div style="margin-bottom: 50px;">
+                        {{!-- <a href="/admin/downloadPdf?startDate={{startDate}}&endDate={{endDate}}"><button type="button" class="btn btn-outline-primary">Download PDF</button></a> --}}
+                        <a href="/admin/downloadExcel?startDate={{startDate}}&endDate={{endDate}}"><button type="button" class="btn btn-outline-primary">Download Excel</button></a>
+              </div>
+                    
+                    <div class="table-responsive">
+                      <table  id="example"  class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>S.No</th>
+                            <th>Order Id</th>
+                            <th>Custome Name</th>
+                            <th>Bill Amount</th>
+                            <th>Payment Type</th>
+                            <th>Order Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {{#each orders}}
+                          <tr>
+                            <td> {{inc @index}}</td>
+                            <td>{{orderId}}</td>
+                            <td>{{userId.firstname}}</td>
+                            <td>{{total}}</td>
+                            
+                            <td>{{paymentType}}</td>
+                            <td>{{status}}</td>
+                          </tr>
+                          {{/each}}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+       
+              
+
+{{/if}}
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
+
+<style>
+  #example tbody tr {
+    height: 50px;
+  }
+</style>
+<style>
+ 
+label {
+  margin: 10px;
+  font-size: 12px;
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+input {
+  font-size: 12px;
+}
+
+
+</style>
+

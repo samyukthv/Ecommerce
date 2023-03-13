@@ -49,7 +49,7 @@ router_user.get('/logout' ,isLogin ,userController.userLogout)
 
 
 
-router_user.get('/addToCart/:id' ,isLogin,userController.addToCart)
+router_user.get('/addToCart/:id' ,userController.addToCart)
 router_user.get('/cart',isLogin,userController.loadCart)
 router_user.get('/deleteCart/:id' ,isLogin,userController.deletecart)
 
@@ -60,7 +60,7 @@ router_user.post('/changeqty',userController.changeqty)
 
 
 
-router_user.get('/addToWishlisT/:id',isLogin,userController.addToWishlist)
+router_user.get('/addToWishlisT/:id',userController.addToWishlist)
 router_user.get('/wishlist',isLogin,userController.loadWishlist)
 
 router_user.get('/userProfile' ,isLogin,userController.userProfile)

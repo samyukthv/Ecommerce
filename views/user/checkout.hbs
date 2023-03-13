@@ -5,7 +5,7 @@
 
 <!--================Home Banner Area =================-->
 <!-- breadcrumb start-->
-<section class="breadcrumb breadcrumb_bg">
+<section class="breadcrumb breadcrumb_bg" style="height: 350px;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -243,8 +243,56 @@
 
 
 <script>
-  
+    // Get the form element
+    const form = document.querySelector('#form1');
+
+    // Add an event listener for form submission
+    form.addEventListener('submit', (event) => {
+        // Prevent the form from submitting
+        event.preventDefault();
+
+        // Get the form fields
+        const street = form.elements['street'].value.trim()
+        const district = form.elements['district'].value.trim()
+        const state = form.elements['state'].value.trim()
+        const country = form.elements['country'].value.trim()
+        const pincode = form.elements['pincode'].value.trim()
+
+        // Check if the street field is empty
+        if (!street) {
+            alert('Please enter your street');
+            return;
+        }
+
+        // Check if the district field is empty
+        if (!district) {
+            alert('Please enter your district');
+            return;
+        }
+
+        // Check if the state field is empty
+        if (!state) {
+            alert('Please enter your state');
+            return;
+        }
+
+        // Check if the country field is empty
+        if (!country) {
+            alert('Please enter your country');
+            return;
+        }
+
+        // Check if the pincode field is empty or not a number
+        if (!pincode || isNaN(pincode)) {
+            alert('Please enter a valid pincode');
+            return;
+        }
+
+        // If all fields are valid, submit the form
+        form.submit();
+    });
 </script>
+
 
 
 
@@ -264,6 +312,8 @@
 
 
 <script>
+
+
 
 
  $("#form").submit((e) => {

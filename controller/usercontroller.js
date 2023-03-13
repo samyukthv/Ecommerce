@@ -9,6 +9,7 @@ const client = require("twilio")(accountSid, authToken);
 const productsCollection = require("../models/product_schema");
 const { count, populate, findOne } = require("../models/user_schema");
 const order = require("../models/order_schema");
+const Banner = require('../models/banner_schema')
 const Coupon = require("../models/coupon_Schema");
 const { v4: uuidv4 } = require("uuid");
 const category = require("../models/category_schema");
@@ -38,12 +39,14 @@ const loadHome = async (req, res) => {
         .limit(5)
         .lean();
       const CouponFind = await Coupon.find({}).limit(5).lean();
+      const banner = await Banner.find({status:true}).limit(5).lean();
       res.render("user/home", {
         userdata: req.session.userid,
         product,
         productSkip,
         fullProducts,
         CouponFind,
+        banner
       });
     } else {
       const product = await productsCollection
@@ -61,11 +64,16 @@ const loadHome = async (req, res) => {
         .limit(5)
         .lean();
       const CouponFind = await Coupon.find({}).limit(5).lean();
+
+      const banner = await Banner.find({status:true}).limit(5).lean();
+      console.log(banner);
+
       res.render("user/home", {
         product,
         productSkip,
         fullProducts,
         CouponFind,
+        banner
       });
     }
   } catch (error) {
@@ -75,10 +83,16 @@ const loadHome = async (req, res) => {
 
 const loadshopCategory = async (req, res) => {
   try {
+
+    const pageNum = req.query.page;
+    const perPage = 6;
+
+
     userdata = req.session.userid;
+
     const category1 = await category.find({}).lean();
     const product = await productsCollection
-      .find({ status: true })
+      .find({ status: true }).skip((pageNum - 1) * perPage).limit(perPage)
       .lean()
       .then((data) => {
         res.render("user/products", { data, userdata, category1 });
@@ -464,21 +478,26 @@ const userLogout = async (req, res) => {
 
 const addToWishlist = async (req, res) => {
   try {
-    const userdata = req.session.userid;
-    id = req.params.id;
-    const user = await User.findOne({
-      email: userdata,
-      "wishlist.productdt": id,
-    });
-    if (user) {
-      res.redirect("/products");
-      return;
-    }
-    await User.updateOne(
-      { email: userdata },
-      { $push: { wishlist: { productdt: req.params.id } } }
-    );
-    res.redirect("/products");
+    if(req.session.userid){
+      const userdata = req.session.userid;
+      id = req.params.id;
+      const user = await User.findOne({
+        email: userdata,
+        "wishlist.productdt": id,
+      });
+      if (user) {
+        res.json({ message: "Product already in wishlist" });
+        return;
+      }
+      await User.updateOne(
+        { email: userdata },
+        { $push: { wishlist: { productdt: req.params.id } } }
+      );
+      res.json({ message: "Product added to wishlist" });
+    }else{
+      res.json({message:"hello"})
+     }
+   
   } catch (error) {
     console.log(error.message);
   }
@@ -492,6 +511,13 @@ const loadWishlist = async (req, res) => {
       .lean()
       .exec();
     res.render("user/wishlist", { userdata, wishfind });
+
+    // if (wishfind.wishlist.length <= 0) {
+    //   res.render("user/wishlist", {
+    //     userdata,
+    //     fill: "wishlist is empty please add products to whislist",
+    //   });
+    // }
   } catch (error) {
     console.log(error.message);
   }
@@ -517,39 +543,47 @@ const deleteWish = async (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
+   if(req.session.userid){
+    console.log("addddddddddddddddddddddddddddddddddddddddddddddddddddddd");
     const userdata = req.session.userid;
-    console.log(userdata);
 
     if (userdata) {
-      id = req.params.id;
-      productdata = await productsCollection.findOne({ _id: id });
+      const id = req.params.id;
+      const productdata = await productsCollection.findOne({ _id: id });
       // Check if the product is already in the cart for the user
       const user = await User.findOne({
         email: userdata,
         "cart.productid": id,
       });
       if (user) {
-        res.redirect("/products");
+        res.json({ message: "Product already in cart" });
         return;
       }
-      ///add to cart
+      // Add product to cart
       await User.updateOne(
         { email: userdata },
         { $push: { cart: { productid: id } } }
       );
       const pPrice = productdata.price * 1;
-      const hy = await User.updateOne(
+      await User.updateOne(
         { email: userdata, "cart.productid": id },
         { $set: { "cart.$.total": pPrice } }
       );
-      res.redirect("/products");
+      res.json({ message: "Product added to cart" });
     } else {
-      res.redirect("/login");
-    }
+      res.json({ message: "Unauthorized" });
+    
+  } 
+   }else{
+    res.json({message:"hello"})
+   }
+      
   } catch (error) {
     console.log(error.message);
+
   }
 };
+
 
 const loadCart = async (req, res) => {
   try {
@@ -586,7 +620,7 @@ const deletecart = async (req, res) => {
       { email: userdata },
       { $pull: { cart: { productid: id } } }
     );
-    res.redirect("/cart");
+    res.redirect('/cart')
   } catch (error) {
     console.log(error.message);
   }
@@ -682,41 +716,7 @@ const deleteAddress = async (req, res) => {
   }
 };
 
-const checkOut = async (req, res) => {
-  try {
-    const userdata = req.session.userid;
-    const addressfind = await User.findOne(
-      { email: userdata },
-      { address: 1, _id: 0 }
-    ).lean();
 
-    const productfind = await User.findOne({ email: userdata })
-      .populate("cart.productid")
-      .lean();
-
-    const result = await User.findOne({ email: userdata }, { _id: 1 }).lean();
-
-    const id = result._id.toString();
-
-    let subtotal = productfind.totalbill;
-
-    // Define the flat rate shipping charge
-    const shippingCharge = 50.0;
-
-    // Calculate the total including shipping charge
-    const total = subtotal + shippingCharge;
-
-    res.render("user/checkout", {
-      userdata,
-      addressfind,
-      productfind,
-      total,
-      id,
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
 
 const checkoutaddress = async (req, res) => {
   try {
@@ -826,8 +826,8 @@ const verifyPayment = async (req, res) => {
     let hmac = crypto.createHmac("sha256", "tTIQJkJw52gKqzn1iE0GLgBC");
     hmac.update(
       req.body["response[razorpay_order_id]"] +
-        "|" +
-        req.body["response[razorpay_payment_id]"]
+      "|" +
+      req.body["response[razorpay_payment_id]"]
     );
     hmac = hmac.digest("hex");
     console.log(hmac == req.body["response[razorpay_signature]"]);
@@ -878,7 +878,7 @@ const loadMyOrders = async (req, res) => {
       orderdt = [orderdt];
     }
     res.render("user/myOrders", { userdata, orderdt, orders });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 const cancelOrder = async (req, res) => {
@@ -914,9 +914,53 @@ const orderDetails = async (req, res) => {
   }
 };
 
+
+
+
+const checkOut = async (req, res) => {
+  try {
+    const userdata = req.session.userid;
+    const addressfind = await User.findOne(
+      { email: userdata },
+      { address: 1, _id: 0 }
+    ).lean();
+
+    const productfind = await User.findOne({ email: userdata })
+      .populate("cart.productid")
+      .lean();
+
+    const result = await User.findOne({ email: userdata }, { _id: 1 }).lean();
+
+    const id = result._id.toString();
+
+    let subtotal = productfind.totalbill;
+
+    // Define the flat rate shipping charge
+    const shippingCharge = 50.0;
+
+    // Calculate the total including shipping charge
+    const total = subtotal + shippingCharge;
+
+    res.render("user/checkout", {
+      userdata,
+      addressfind,
+      productfind,
+      total,
+      id,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+
+
+
+
 const applyCoupon = async (req, res) => {
   try {
     let code = req.params.id;
+    console.log(code);
     if (req.session.userid) {
       let userdata = req.session.userid;
       const userId = await User.findOne({ email: userdata }, {});
@@ -928,7 +972,7 @@ const applyCoupon = async (req, res) => {
       if (coupons != null) {
         let today = new Date();
         if (coupons.expDate > today) {
-          let userfind = await Coupon.findOne({ user: userId._id }, {}).lean();
+          let userfind = await Coupon.findOne({couponId: code, user: userId._id }, {}).lean();
 
           let userID = userId._id;
           if (userfind == null) {
@@ -944,6 +988,11 @@ const applyCoupon = async (req, res) => {
               { $push: { user: userId._id } }
             );
             res.json({ status: true, discountPrice });
+            // let result = await Coupon.updateOne(
+            //   { couponId: code },
+            //   { $pull: { user: userId } }
+            // );
+            
           } else {
             res.json({ used: true });
             console.log("useddd");

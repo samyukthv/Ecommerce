@@ -1,6 +1,6 @@
 var express = require('express');
 const app=require('../index')
-const { adminLog, loadLogin, adminHome, adminLogout,  userList, blockUser, unblockUser, orderList, viewDetails, vieworder, displayCoupon, addCoupon, insertCoupon, deleteCoupon, blockCoupon, unblockCoupon, editCoupon, updateCoupon, orderStatus } = require('../controller/adminController');
+const { adminLog, loadLogin, adminHome, adminLogout,  userList, blockUser, unblockUser, orderList, viewDetails, vieworder, displayCoupon, addCoupon, insertCoupon, deleteCoupon, blockCoupon, unblockCoupon, editCoupon, updateCoupon, orderStatus, loadSalesReport, generateReport, downloadPdf, downloadExcel, loadAddBanner, loadBannerList, addNewBanner, listBanner, editBanner, updateBanner, blockBanner, unblockBanner } = require('../controller/adminController');
 const upload= require('../multer')
 var admin_router = express.Router();
 const adminAuth=require('../middlerware/adminAuth');
@@ -65,9 +65,22 @@ admin_router.get('/viewOrder/:id', adminAuth.isLogin,vieworder)
 
  admin_router.post('/orderStatus',adminAuth.isLogin,orderStatus)
 
-
-
+admin_router.get('/salesReport',adminAuth.isLogin,loadSalesReport)
+admin_router.post('/generateReport',adminAuth.isLogin,generateReport)
  
+admin_router.get('/downloadPdf',adminAuth.isLogin,downloadPdf)
+admin_router.get('/downloadExcel',adminAuth.isLogin,downloadExcel)
+
+admin_router.get('/addBanner',adminAuth.isLogin,loadAddBanner)
+
+
+admin_router.post('/addNewBanner',upload.single('image'),addNewBanner)
+admin_router.get('/bannerList', adminAuth.isLogin,listBanner)
+admin_router.get('/editBanner/:id',adminAuth.isLogin,editBanner)
+admin_router.post('/updateBanner',upload.single('image'),updateBanner)
+admin_router.get('/blockBanner/:id',adminAuth.isLogin,blockBanner)
+admin_router.get('/unblockBanner/:id',adminAuth.isLogin,unblockBanner)
+
 
 module.exports =admin_router;
 
