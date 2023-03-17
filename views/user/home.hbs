@@ -24,51 +24,69 @@
     <link rel="stylesheet" href="/assetuser/css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="/assetuser/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marko+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-    <div>
         {{>userHeader}}
-    </div>
-    
-    <!-- banner part start-->
-    <!-- ** corosel  Area Starts ** -->
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-           <div class="carousel-item active">
-    <img style="height: 700px;" class="d-block w-100" src="\images\kenny-eliason-Wp7t4cWN-68-unsplash.jpg" alt="First slide">
-    <div class="carousel-caption d-md-block" style="margin-bottom: 200px;">
-        <h1 style=" font-size: 4rem; font-family: 'Open Sans', sans-serif;">HOMELY FURNITURES.</h1>
-        <div class="main-border-button">
-            <a href="/products" style="color: #ff3368; text-decoration: none; font-size: 1.2rem; padding: 10px 20px; border: 2px solid #ff3368; font-family: 'Open Sans', sans-serif;"><button class="btn">
-    Discover More
-</button></a>
-        </div>
-        <h3 style="color: #fff; font-size: 2rem; font-family: 'Open Sans', sans-serif; margin: 20px;">We sell the best furnitures you can get for your home.</h3>
-    </div>
-</div>
 
-           {{#each banner}}
-                <div class="carousel-item ">
-                    <img style="height: 700px;" class="d-block w-100 " src="/images/{{image.[0]}}"
-                    alt="First slide">
+
+        <!-- banner part start-->
+        <!-- ** corosel  Area Starts ** -->
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:100%;">
+            <div class="carousel-inner">
+                <div class="  carousel-item active w-100" style="width:100%;">
+                    <img style="height: 700px;" class="d-block w-100"
+                        src="\images\kenny-eliason-Wp7t4cWN-68-unsplash.jpg" alt="First slide">
+                    <div class=" carousel-caption d-md-block" style="margin-bottom: 200px;">
+                        <h1 style="   font-family: 'Gravitas One', cursive;">HOMELY FURNITURES.</h1>
+                        <div class="main-border-button">
+                            <a href="/products"
+                                style="color: #ff3368; text-decoration: none; font-size: 1.2rem; padding: 10px 20px; border: 2px solid #ff3368; font-family: 'Open Sans', sans-serif;"><button
+                                    class="btn">
+                                    Discover More
+                                </button></a>
+                        </div>
+                        <h3 style="color: #fff; font-size: 2rem; font-family: 'Orelega One', cursive; margin: 20px;">We
+                            sell the best furnitures you can get for your home.</h3>
+                    </div>
+                </div>
+
+                {{#each banner}}
+                <div class="carousel-item " style="100%">
+                    <img style="height: 700px;" class="d-block w-100 " src="/images/{{image.[0]}}" alt="First slide">
                     <div class="carousel-caption  d-md-block" style="margin-bottom: 150px;">
                         <h1 style="margin-bottom: 30px;">
-                           {{name}}
+                            {{name}}
                         </h1>
                         <div class="main-border-button">
-                          
-                               <a href="/products" style="color: #ff3368; text-decoration: none; font-size: 1.2rem; padding: 10px 20px; border: 2px solid #ff3368; font-family: 'Open Sans', sans-serif;"> <button class="btn">
-    View More
-</button></a>
-                           
+
+                            <a href="/products"
+                                style="color: #ff3368; text-decoration: none; font-size: 1.2rem; padding: 10px 20px; border: 2px solid #ff3368; font-family: 'Open Sans', sans-serif;">
+                                <button class="btn">
+                                    View More
+                                </button></a>
+
                         </div>
-                        <h3 style="color: #fcfcfc; margin-top: 30px;">
-                           {{description}}
+                        <h3 style="color: #fcfcfc; margin-top: 30px; font-family: 'Orelega One', cursive;">
+                            {{description}}
                         </h3>
                     </div>
                 </div>
-              {{/each}}
+                {{/each}}
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -82,318 +100,370 @@
 
 
         <!-- ** corosel  Area Ends ** -->
-    <!-- banner part start-->
+        <!-- banner part start-->
 
-    <!-- feature_part start-->
+        <!-- feature_part start-->
+    <div class="container" style="overflow:hidden;" >
 
-    <section class="feature_part padding_top">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="section_tittle text-center">
-                        <h2>Featured Products</h2>
+        <section class="feature_part padding_top">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="section_tittle text-center">
+                            <h2>Featured Products</h2>
+                        </div>
                     </div>
                 </div>
+
+                <div class=" row align-items-center justify-content-between ">
+                    {{#each product}}
+                    <div class="col-lg-6 col-sm-6 ">
+                        <div class="single_feature_post_text">
+                            <p>Premium Quality</p>
+                            <h3>{{this.productName}}</h3>
+                            <a href="/singleProduct/{{this._id}}" class="feature_btn">EXPLORE NOW <i
+                                    class="fas fa-play"></i></a>
+                            <img style="width: 250px; height: 350px;" src="/images/{{this.image.[0]}}" alt="">
+                        </div>
+                    </div>
+                    {{/each}}
+
+                    {{!-- <div class="col-lg-5 col-sm-6">
+                        <div class="single_feature_post_text">
+                            <p>Premium Quality</p>
+                            <h3>Latest foam Sofa</h3>
+                            <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                            <img src="/assetuser/img/feature/feature_2.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-sm-6">
+                        <div class="single_feature_post_text">
+                            <p>Premium Quality</p>
+                            <h3>Latest foam Sofa</h3>
+                            <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                            <img src="/assetuser/img/feature/feature_3.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-sm-6">
+                        <div class="single_feature_post_text">
+                            <p>Premium Quality</p>
+                            <h3>Latest foam Sofa</h3>
+                            <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                            <img src="/assetuser/img/feature/feature_4.png" alt="">
+                        </div>
+                    </div> --}}
+                </div>
+
             </div>
+        </section>
 
-            <div class=" row align-items-center justify-content-between ">
-                {{#each product}}
-                <div class="col-lg-6 col-sm-6 ">
-                    <div class="single_feature_post_text">
-                        <p>Premium Quality</p>
-                        <h3>{{this.productName}}</h3>
-                        <a href="/singleProduct/{{this._id}}" class="feature_btn">EXPLORE NOW <i
-                                class="fas fa-play"></i></a>
-                        <img style="width: 250px; height: 350px;" src="/images/{{this.image.[0]}}" alt="">
+        <!-- upcoming_event part start-->
+
+        <!-- product_list start-->
+        <section class="product_list section_padding" style="padding: 0;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="section_tittle text-center">
+                            <h2>awesome <span>shop</span></h2>
+                        </div>
                     </div>
                 </div>
-                {{/each}}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row align-items-center justify-content-between">
+                            {{#each productSkip}}
+                            <div class="col-lg-3 col-sm-3">
 
-                {{!-- <div class="col-lg-5 col-sm-6">
-                    <div class="single_feature_post_text">
-                        <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
-                        <img src="/assetuser/img/feature/feature_2.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-5 col-sm-6">
-                    <div class="single_feature_post_text">
-                        <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
-                        <img src="/assetuser/img/feature/feature_3.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-sm-6">
-                    <div class="single_feature_post_text">
-                        <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
-                        <img src="/assetuser/img/feature/feature_4.png" alt="">
-                    </div>
-                </div> --}}
-            </div>
-
-        </div>
-    </section>
-
-    <!-- upcoming_event part start-->
-
-    <!-- product_list start-->
-    <section class="product_list section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>awesome <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row align-items-center justify-content-between">
-                        {{#each productSkip}}
-                        <div class="col-lg-3 col-sm-3">
-
-                            <div class="single_product_item">
-                                <img src="/images/{{this.image.[0]}}" alt="">
-                                <div class="single_product_text">
-                                    <h4{{this.productName}}< /h4>
+                                <div class="single_product_item">
+                                    <img src="/images/{{this.image.[0]}}" alt="">
+                                    <div class="single_product_text">
+                                        <h4>{{this.productName}}</h4>
                                         <h3>${{this.price}}</h3>
                                         <a href="/singleProduct?id={{this._id}}"
                                             style="text-decoration: none; font-size: 16px; color: blue;">View
-                                            More</a>
+                                            Product</a>
                                         <div class="d-flex">
-                                            <a href="/addToCart/{{this._id}}" class="add_cart ">+ add to cart</a>
+                                            <a onclick="addToCart('{{this._id}}')"  class="add_cart ">+To cart</a>
 
-                                            <a href="/addToWishlist/{{this._id}}"><i class="ti-heart "
+                                            <a onclick="addToWishlist('{{this._id}}')"><i class="ti-heart "
                                                     style="margin-left: 40px; margin-bottom: 10px;"></i></a>
                                         </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product_list part start-->
+
+
+        <!-- product_list part start-->
+        <section class="product_list best_seller section_padding" style="padding: 0;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="section_tittle text-center">
+                            <h2>Best Sellers <span>shop</span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg-12">
+                        <div class="best_product_slider owl-carousel">
+                            {{#each fullProducts}}
+                            <div class="single_product_item">
+                                <img src="/images/{{this.image.[0]}}" alt="">
+                                <div class="single_product_text">
+                                    <h4>{{this.productName}}</h4>
+                                    <h3>${{this.price}}</h3>
+                                    <a href="/singleProduct?id={{this._id}}"
+                                        style="text-decoration: none; font-size: 16px; color: blue;">View
+                                        More</a>
+                                    <div class="d-flex">
+                                        <a href="/addToCart/{{this._id}}" class="add_cart ">+ add to cart</a>
+
+                                        <a href="/addToWishlist/{{this._id}}"><i class="ti-heart "
+                                                style="margin-left: 40px; margin-bottom: 10px;"></i></a>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- product_list part start-->
-
-
-    <!-- product_list part start-->
-    <section class="product_list best_seller section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>Best Sellers <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-12">
-                    <div class="best_product_slider owl-carousel">
-                        {{#each fullProducts}}
-                        <div class="single_product_item">
-                            <img src="/images/{{this.image.[0]}}" alt="">
-                            <div class="single_product_text">
-                                <h4>{{this.productName}}</h4>
-                                <h3>${{this.price}}</h3>
-                                <a href="/singleProduct?id={{this._id}}"
-                                    style="text-decoration: none; font-size: 16px; color: blue;">View
-                                    More</a>
-                                <div class="d-flex">
-                                    <a href="/addToCart/{{this._id}}" class="add_cart ">+ add to cart</a>
-
-                                    <a href="/addToWishlist/{{this._id}}"><i class="ti-heart "
-                                            style="margin-left: 40px; margin-bottom: 10px;"></i></a>
+                            {{/each}}
+                            {{!-- <div class="single_product_item">
+                                <img src="/assetuser/img/product/product_2.png" alt="">
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
                                 </div>
                             </div>
-                        </div>
-                        {{/each}}
-                        {{!-- <div class="single_product_item">
-                            <img src="/assetuser/img/product/product_2.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
+                            <div class="single_product_item">
+                                <img src="/assetuser/img/product/product_3.png" alt="">
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="/assetuser/img/product/product_3.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
+                            <div class="single_product_item">
+                                <img src="/assetuser/img/product/product_4.png" alt="">
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="/assetuser/img/product/product_4.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="/assetuser/img/product/product_5.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- product_list part end-->
-
-    <!-- subscribe_area part start-->
-    {{!-- <section class="subscribe_area section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="subscribe_area_text text-center">
-                        <h5>Join Our Newsletter</h5>
-                        <h2>Subscribe to get Updated
-                            with new offers</h2>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="enter email address"
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <a href="#" class="input-group-text btn_2" id="basic-addon2">subscribe now</a>
-                            </div>
+                            <div class="single_product_item">
+                                <img src="/assetuser/img/product/product_5.png" alt="">
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section> --}}
-    <!--::subscribe_area part end::-->
+        </section>
+      
 
-    <!-- subscribe_area part start-->
-    
-    <section class="client_logo padding_top">
-        <div class="container">
-            <div class="row align-items-center">
-                 <h3 class="card-title fw-bold fs-5" style="margin-left: 35%;  color: blue; ">Get A Chance To Win Exiting Offers</h3>
-                <h2 style="margin-left: 35%; margin-bottom: 10%;">USE ANY OF THESE COUPONS</h2>
-                <div class="col-lg-12">
-                   
-                     {{#each CouponFind}}
-                    <div class="single_client_logo">
-                        {{!-- <img src="/assetuser/img/client_logo/client_logo_1.png" alt=""> --}}
-                       
-                        <div class="card border-0">
-                            <div class="card-body">
-                                
-                                <h3 class="card-text">{{this.couponId}}</h3>
-                            </div>
-                        </div>
+        <!-- subscribe_area part start-->
+
+       
+
+        <section class="client_logo py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-8 offset-md-2 text-center">
+        <h3 class="card-title fw-bold fs-5 mb-3">Get A Chance To Win Exciting Offers</h3>
+        <h2 class="mb-4">Use Any of These Coupons</h2>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          {{#each CouponFind}}
+          <div class="col-6 col-md-3 mb-4">
+            <div class="card border-0">
+              <div class="card-body text-center">
+                <h3 class="card-text">{{this.couponId}}</h3>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <!--::subscribe_area part end::-->
+
+        <style>
+            .btn {
+                font-size: 17px;
+                background: transparent;
+                border: none;
+                padding: 1em 1.5em;
+                color: #ffedd3;
+                text-transform: uppercase;
+                position: relative;
+                transition: .5s ease;
+            }
+
+            .btn::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 2px;
+                width: 0;
+                background-color: #ffc506;
+                transition: .5s ease;
+            }
+
+            .btn:hover {
+                color: #1e1e2b;
+                transition-delay: .5s;
+            }
+
+            .btn:hover::before {
+                width: 100%;
+            }
+
+            .btn::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 0;
+                width: 100%;
+                background-color: #ffc506;
+                transition: .4s ease;
+                z-index: -1;
+            }
+
+            .btn:hover::after {
+                height: 100%;
+                transition-delay: 0.4s;
+                color: aliceblue;
+            }
+        </style>
+
+
+<script>
+
+   function addToCart(proId) {
+    $.ajax({
+    url: '/addToCart/' + proId,
+    method: 'get',
+    success: (response) => {
+        if (response.message === "Product already in cart") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Product already in cart',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message === "Product added to cart") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Product added to cart',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message==="hello") {
+            location.href='/login'
+
+            // Handle other response messages
+        }
+        else if (response.message === "Product is out of stock"){
+                      Swal.fire({
+                        position: 'top-center',
                         
+                        title: 'product is out of stock',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
 
+                }
+    },
+    error: (error) => {
+        // Handle errors
+    }
+});
 
-                    </div>
-                    {{/each}}
-                    {{!-- <div class="single_client_logo">
-                        <img src="/assetuser/img/client_logo/client_logo_2.png" alt="">
-                    </div>
-                    <div class="single_client_logo">
-                        <img src="/assetuser/img/client_logo/client_logo_3.png" alt="">
-                    </div>
-                    <div class="single_client_logo">
-                        <img src="/assetuser/img/client_logo/client_logo_4.png" alt="">
-                    </div>
-                    <div class="single_client_logo">
-                        <img src="/assetuser/img/client_logo/client_logo_5.png" alt="">
-                    </div> --}}
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--::subscribe_area part end::-->
-
-    <style>
-        .btn {
-  font-size: 17px;
-  background: transparent;
-  border: none;
-  padding: 1em 1.5em;
-  color: #ffedd3;
-  text-transform: uppercase;
-  position: relative;
-  transition: .5s ease;
 }
 
-.btn::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: 0;
-  background-color: #ffc506;
-  transition: .5s ease;
+
+
+ function addToWishlist(proId) {
+    $.ajax({
+    url: '/addToWishlist/' + proId,
+    method: 'get',
+    success: (response) => {
+        if (response.message === "Product already in wishlist") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Product already in wishlist',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message === "Product added to wishlist") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Product added to wishlist',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message==="hello") {
+            location.href='/login'
+            // Handle other response messages
+        }
+    },
+    error: (error) => {
+        // Handle errors
+    }
+});
+
 }
 
-.btn:hover {
-  color: #1e1e2b;
-  transition-delay: .5s;
-}
 
-.btn:hover::before {
-  width: 100%;
-}
 
-.btn::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 0;
-  width: 100%;
-  background-color: #ffc506;
-  transition: .4s ease;
-  z-index: -1;
-}
+</script>
 
-.btn:hover::after {
-  height: 100%;
-  transition-delay: 0.4s;
-  color: aliceblue;
-}
 
-    </style>
-
-    {{>userFooter}}
-    <!-- jquery plugins here-->
-    <script src="/assetuser/js/jquery-1.12.1.min.js"></script>
-    <!-- popper js -->
-    <script src="/assetuser/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="/assetuser/js/bootstrap.min.js"></script>
-    <!-- easing js -->
-    <script src="/assetuser/js/jquery.magnific-popup.js"></script>
-    <!-- swiper js -->
-    <script src="/assetuser/js/swiper.min.js"></script>
-    <!-- swiper js -->
-    <script src="/assetuser/js/masonry.pkgd.js"></script>
-    <!-- particles js -->
-    <script src="/assetuser/js/owl.carousel.min.js"></script>
-    <script src="/assetuser/js/jquery.nice-select.min.js"></script>
-    <!-- slick js -->
-    <script src="/assetuser/js/slick.min.js"></script>
-    <script src="/assetuser/js/jquery.counterup.min.js"></script>
-    <script src="/assetuser/js/waypoints.min.js"></script>
-    <script src="/assetuser/js/contact.js"></script>
-    <script src="/assetuser/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/assetuser/js/jquery.form.js"></script>
-    <script src="/assetuser/js/jquery.validate.min.js"></script>
-    <script src="/assetuser/js/mail-script.js"></script>
-    <!-- custom js -->
-    <script src="/assetuser/js/custom.js"></script>
+        {{>userFooter}}
+        <!-- jquery plugins here-->
+        <script src="/assetuser/js/jquery-1.12.1.min.js"></scrip>
+        <!-- popper js -->
+        <script src="/assetuser/js/popper.min.js"></script>
+        <!-- bootstrap js -->
+        <script src="/assetuser/js/bootstrap.min.js"></script>
+        <!-- easing js -->
+        <script src="/assetuser/js/jquery.magnific-popup.js"></script>
+        <!-- swiper js -->
+        <script src="/assetuser/js/swiper.min.js"></script>
+        <!-- swiper js -->
+        <script src="/assetuser/js/masonry.pkgd.js"></script>
+        <!-- particles js -->
+        <script src="/assetuser/js/owl.carousel.min.js"></script>
+        <script src="/assetuser/js/jquery.nice-select.min.js"></script>
+        <!-- slick js -->
+        <script src="/assetuser/js/slick.min.js"></script>
+        <script src="/assetuser/js/jquery.counterup.min.js"></script>
+        <script src="/assetuser/js/waypoints.min.js"></script>
+        <script src="/assetuser/js/contact.js"></script>
+        <script src="/assetuser/js/jquery.ajaxchimp.min.js"></script>
+        <script src="/assetuser/js/jquery.form.js"></script>
+        <script src="/assetuser/js/jquery.validate.min.js"></script>
+        <script src="/assetuser/js/mail-script.js"></script>
+        <!-- custom js -->
+        <script src="/assetuser/js/custom.js"></script>
+    </div>
 </body>
 
 </html>

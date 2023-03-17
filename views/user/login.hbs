@@ -85,7 +85,11 @@
                                      {{#if logfail}}
                               <div class="alert alert-danger text-center mb-3">{{logfail}}</div>
                                  {{/if}}
+                                  {{#if blocked}}
+                              <div class="alert alert-danger text-center mb-3">{{blocked}}</div>
+                                 {{/if}}
                                     <a class="lost_pass" href="/forgotPass">forget password?</a>
+
                                 </div>
                             </form>
                         </div>

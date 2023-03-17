@@ -1252,22 +1252,22 @@
   // valid state. If that fails, it returns the line with the
   // smallest indentation, which tends to need the least context to
   // parse correctly.
-  function findStartLine(cm, n, precise) {
-    var minindent, minline, doc = cm.doc;
-    var lim = precise ? -1 : n - (cm.doc.mode.innerMode ? 1000 : 100);
-    for (var search = n; search > lim; --search) {
-      if (search <= doc.first) { return doc.first }
-      var line = getLine(doc, search - 1), after = line.stateAfter;
-      if (after && (!precise || search + (after instanceof SavedContext ? after.lookAhead : 0) <= doc.modeFrontier))
-        { return search }
-      var indented = countColumn(line.text, null, cm.options.tabSize);
-      if (minline == null || minindent > indented) {
-        minline = search - 1;
-        minindent = indented;
-      }
-    }
-    return minline
-  }
+  // function findStartLine(cm, n, precise) {
+  //   var minindent, minline, doc = cm.doc;
+  //   var lim = precise ? -1 : n - (cm.doc.mode.innerMode ? 1000 : 100);
+  //   for (var search = n; search > lim; --search) {
+  //     if (search <= doc.first) { return doc.first }
+  //     var line = getLine(doc, search - 1), after = line.stateAfter;
+  //     if (after && (!precise || search + (after instanceof SavedContext ? after.lookAhead : 0) <= doc.modeFrontier))
+  //       { return search }
+  //     var indented = countColumn(line.text, null, cm.options.tabSize);
+  //     if (minline == null || minindent > indented) {
+  //       minline = search - 1;
+  //       minindent = indented;
+  //     }
+  //   }
+  //   return minline
+  // }
 
   function retreatFrontier(doc, n) {
     doc.modeFrontier = Math.min(doc.modeFrontier, n);
@@ -1305,12 +1305,12 @@
   }
 
   // Search an array of spans for a span matching the given marker.
-  function getMarkedSpanFor(spans, marker) {
-    if (spans) { for (var i = 0; i < spans.length; ++i) {
-      var span = spans[i];
-      if (span.marker == marker) { return span }
-    } }
-  }
+  // function getMarkedSpanFor(spans, marker) {
+  //   if (spans) { for (var i = 0; i < spans.length; ++i) {
+  //     var span = spans[i];
+  //     if (span.marker == marker) { return span }
+  //   } }
+  // }
   // Remove a span from an array, returning undefined if no spans are
   // left (we don't store arrays for lines without spans).
   function removeMarkedSpan(spans, span) {

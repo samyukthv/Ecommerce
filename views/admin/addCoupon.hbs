@@ -87,6 +87,9 @@
                           <input type="date" class="form-control" name="expDate" id="exampleInputConfirmPassword2" placeholder="exp date" required>
                         </div>
                       </div>
+                      {{#if couponStatus}}
+    <div class="alert alert-danger text-center mb-3">{{couponStatus}}</div>
+    {{/if}}
                      
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
                       <button class="btn btn-dark">Cancel</button>

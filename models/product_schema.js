@@ -31,11 +31,7 @@ var productschema = new Schema({
         type:Number,
         require:true,
     },
-    categoryName:{
-        type:String,
-        required:true,
-        default:true,
-    },
+
     categoryId:{
        type:mongoose.Schema.Types.ObjectId,
        ref:'category',

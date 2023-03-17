@@ -116,7 +116,7 @@
                     <canvas id="transaction-history" class="transaction-chart" style="background-color: rgb(36, 39, 72);"></canvas>
                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                       <div class="text-md-center text-xl-left">
-                        <h6 class="mb-1"> Online payment</h6>
+                        <h6 class="mb-1">Cash On Delivery </h6>
                         <p class="text-muted mb-0">within Last month</p>
                       </div>
                       <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
@@ -125,11 +125,21 @@
                     </div>
                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                       <div class="text-md-center text-xl-left">
-                        <h6 class="mb-1">Cash On Delivery</h6>
+                        <h6 class="mb-1">Online payment</h6>
                         <p class="text-muted mb-0">within last month</p>
                       </div>
                       <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
                         <h6 class="font-weight-bold mb-0">${{pTotal.[1].total}}</h6>
+                      
+                      </div>
+                    </div>
+                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                      <div class="text-md-center text-xl-left">
+                        <h6 class="mb-1">Wallet payment</h6>
+                        <p class="text-muted mb-0">within last month</p>
+                      </div>
+                      <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                        <h6 class="font-weight-bold mb-0">${{pTotal.[2].total}}</h6>
                       
                       </div>
                     </div>
@@ -138,6 +148,7 @@
               </div>
 
               <input type="hidden" value="{{categoryNames}}" id="catName">
+              <input type="hidden" value="{{paymentTypes}}" id="pType">
 
               <div class="col-sm-4 grid-margin" style="margin-top: 13%;">
                 <div class="card" style="background-color: rgb(36, 39, 72); width:70%;">
@@ -179,9 +190,14 @@
   console.log(categoryNames)
   var categoryNamesArray = categoryNames.split(",");
   console.log(categoryNamesArray);
+
+  var payment = document.getElementById("pType").value;
+console.log(payment)
+  var paymentArray = payment.split(",");
+  console.log(paymentArray)
   
     var data1 = {
-        labels: ["6 DAYS BEFORE","5 DAYS BEFORE","4 DAYS BEFORE","3 DAYS BEFORE","2 DAYS BEFORE","Yesturday","Today"],
+        labels: ["1","2","3","4","5","6","7"],
         datasets: [{
             label: 'COUNT OF DAILY ORDERS',
             data: [{{orderCounts}}],
@@ -274,7 +290,7 @@
 
 if ($("#transaction-history").length) {
       var areaData = {
-        labels: ["online payment", "cash on delivery"],
+        labels: paymentArray ,
         datasets: [{
             data: [{{count}}],
             backgroundColor: [

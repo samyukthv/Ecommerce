@@ -89,14 +89,18 @@
 
             {{!-- {{#each data}} --}}
             <h3>{{data.productName}}</h3>
-            <h2>${{data.price}}</h2>
+            <h2>&#8377;{{data.price}}</h2>
             <ul class="list">
               <li>
                 <a class="active" href="#">
-                  <span>Category</span> : {{data.categoryName}}</a>
+                  <span>Category</span> : {{data.categoryId.categoryName}}</a>
               </li>
               <li>
-                <a href="#"> <span>Availibility</span> : {{data.stock}}</a>
+               {{#ifCond data.stock '==' "Out of Stock" }}
+                <a href="#"  style="color: red;"> <span>Availibility</span> : {{data.stock}}</a>
+                {{else}}
+                   <a href="#"> <span>Availibility</span> : {{data.stock}}</a>
+                {{/ifCond}}
               </li>
             </ul>
 
@@ -105,8 +109,8 @@
             </p>
             <div class="card_area d-flex justify-content-between align-items-center">
 
-              <a href="/addToCart/{{data._id}}" class="btn_3">add to cart</a>
-              <a href="/addToWishlist/{{data._id}}" class="like_us"> <i class="ti-heart"></i> </a>
+             <a onclick="addToCart('{{data._id}}')" class="btn_3" style="cursor: pointer; color: white ;">add to cart</a>
+              <a onclick="addToWishlist('{{data._id}}')" class="like_us"><i class="ti-heart"></i></a>
             </div>
           </div>
         </div>
@@ -304,18 +308,18 @@
                   
                   <div class="col-6">
                     <div class="rating_list">
-                   <h3 style="margin-right: auto; color: blue;">USER REVIEWS</h3>
+                   <h3 style="margin-right: auto;  color: rgb(255, 0, 140);">USER REVIEWS</h3>
 
                     </div>
                   </div>
                 </div> 
-                {{log reviews}}
+               
                 <div class="review_list">
                 {{#each reviews}}
 
-                  <div class="review_item">
+                  <div class="review_item" style="">
                      <h6 style="margin-bottom: 0px;">{{userName}}</h6>
-                    <p style="margin-top: 0px;">
+                    <p style="margin-top: 0px; ">
                       {{message}}
                     </p>
                   </div>
@@ -350,6 +354,8 @@
                   </form>
                 </div>
               </div>
+              {{else}}
+            <h6 style="color: rgb(255, 0, 140) ;"> Please add review after purchasing the product</h6>
               {{/if}}
             </div>
           </div>
@@ -465,8 +471,90 @@
     <script src="/assetuser/js/custom.js"></script>
 
 
+<script>
+
+   function addToCart(proId) {
+    $.ajax({
+    url: '/addToCart/' + proId,
+    method: 'get',
+    success: (response) => {
+        if (response.message === "Product already in cart") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Product already in cart',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message === "Product added to cart") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Product added to cart',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message==="hello") {
+            location.href='/login'
+
+            // Handle other response messages
+        }
+        else if (response.message === "Product is out of stock"){
+                      Swal.fire({
+                        position: 'top-center',
+                        
+                        title: 'product is out of stock',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
+                }
+    },
+    error: (error) => {
+        // Handle errors
+    }
+});
+
+}
 
 
+
+ function addToWishlist(proId) {
+    $.ajax({
+    url: '/addToWishlist/' + proId,
+    method: 'get',
+    success: (response) => {
+        if (response.message === "Product already in wishlist") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Product already in wishlist',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message === "Product added to wishlist") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Product added to wishlist',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (response.message==="hello") {
+            location.href='/login'
+            // Handle other response messages
+        }
+    },
+    error: (error) => {
+        // Handle errors
+    }
+});
+
+}
+
+
+
+</script>
 
 
 

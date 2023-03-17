@@ -211,8 +211,8 @@ console.log(categoryCounts);
 
 
 
-
-
+console.log("heehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+console.log(paymentTypes);
 
 
 
@@ -230,7 +230,7 @@ console.log(categoryCounts);
       totalCategories,
       orderCounts,
       categoryCounts,
-      categoryNames
+      categoryNames,paymentTypes
     
     });
   } catch (error) {
@@ -242,7 +242,7 @@ console.log(categoryCounts);
 
 const adminLogout = async (req, res) => {
   try {
-    req.session.destroy();
+    req.session.adminid=null;
     res.redirect("/admin");
   } catch (error) {
     console.log(error.message);
@@ -348,10 +348,31 @@ const addCoupon = async (req, res) => {
 
 const insertCoupon = async (req, res) => {
   try {
+    
     const coupondt = req.body;
+    coupondt.couponId = coupondt.couponId
+    .split(" ")
+    .join(" ")
+    .toUpperCase();
+  let couponDb = await Coupon.findOne({
+    couponId:coupondt.couponId,
+  });
+  console.log(couponDb);
+  if (couponDb) {
+    if (coupondt.couponId == couponDb.couponId) {
+      res.render("admin/addCoupon", {
+        layout: "admin_layout",
+        couponStatus: "coupon already exist",
+      });
+    }
+  }else{
     const coupons = new Coupon(coupondt);
     coupons.save();
     res.redirect("/admin/addCoupon");
+
+  }
+
+   
   } catch (error) {
     console.log(error.message);
   }

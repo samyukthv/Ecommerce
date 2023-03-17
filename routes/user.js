@@ -5,7 +5,7 @@ var router_user = express.Router();
 const User=require('../models/user_schema')
 const userController=require('../controller/usercontroller');
 const { isLogin, isLogout } = require('../middlerware/auth');
-
+const block=require('../middlerware/block')
 const productController=require('../controller/productcontroller');
 
 
@@ -21,97 +21,107 @@ const productController=require('../controller/productcontroller');
 
 
 /* GET home page. */
-router_user.get('/', userController.loadHome)
-router_user.get('/products', userController.loadshopCategory)
+router_user.get('/',block.ifBlocked, userController.loadHome)
+router_user.get('/products',block.ifBlocked, userController.loadProducts)
 
-router_user.get('/categoryFilter/:id', userController.categoryFilter)
+router_user.post('/search',block.ifBlocked, userController.loadProducts)
 
-router_user.get('/login' ,isLogout,userController.loadUserLogin)
-router_user.get('/register',isLogout,userController.loadUserRegister)
-router_user.get('/otpVerify',isLogout,userController.otpVerify)
+router_user.get('/categoryFilter/:id',block.ifBlocked, userController.categoryFilter)
+router_user.get('/highLow',block.ifBlocked, userController.highLow)
+router_user.get('/lowHigh',block.ifBlocked, userController.lowHigh)
 
-router_user.get('/forgotPass',isLogout,userController.mobileConfirm)
-router_user.post('/otpGenerate',isLogout,userController.otpGenerate)
-router_user.get('/otpForgotPass',isLogout,userController.OtpForgotPass)
-router_user.post('/otpForgotVerifyPass',isLogout,userController.otpCompareForgotPass)
-router_user.get('/otpForgotVerifyPass',isLogout,userController.loadForgotPassOtp)
-router_user.get('/resetPass',isLogout,userController.loadResetPass)
-router_user.post('/resetPassword',isLogout,userController.resetPassword)
+router_user.get('/login' ,block.ifBlocked, isLogout,userController.loadUserLogin)
+router_user.get('/register',block.ifBlocked, isLogout,userController.loadUserRegister)
+router_user.get('/otpVerify',block.ifBlocked, isLogout,userController.otpVerify)
+
+router_user.get('/forgotPass',block.ifBlocked, isLogout,userController.mobileConfirm)
+router_user.post('/otpGenerate', block.ifBlocked,isLogout,userController.otpGenerate)
+router_user.get('/otpForgotPass', block.ifBlocked,isLogout,userController.OtpForgotPass)
+router_user.post('/otpForgotVerifyPass',block.ifBlocked,isLogout,userController.otpCompareForgotPass)
+router_user.get('/otpForgotVerifyPass',block.ifBlocked,isLogout,userController.loadForgotPassOtp)
+router_user.get('/resetPass',block.ifBlocked,isLogout,userController.loadResetPass)
+router_user.post('/resetPassword',block.ifBlocked,isLogout,userController.resetPassword)
 
 
 // router_user.get('/products',userController.loadProducts)
-router_user.get('/singleProduct/:id',  userController.loadSingleProduct)
-router_user.post('/userRegister',userController.doSignup)
-router_user.post('/otpVerify',userController.otpCompare)
-router_user.post('/login',userController.userLogin)
+router_user.get('/singleProduct/:id',block.ifBlocked,  userController.loadSingleProduct)
+router_user.post('/userRegister',block.ifBlocked,userController.doSignup)
+router_user.post('/otpVerify',block.ifBlocked,userController.otpCompare)
+router_user.post('/login',block.ifBlocked,userController.userLogin)
 
-router_user.get('/logout' ,isLogin ,userController.userLogout)
-
-
-
-router_user.get('/addToCart/:id' ,userController.addToCart)
-router_user.get('/cart',isLogin,userController.loadCart)
-router_user.get('/deleteCart/:id' ,isLogin,userController.deletecart)
+router_user.get('/logout' ,block.ifBlocked,isLogin ,userController.userLogout)
 
 
-router_user.post('/changeqty',userController.changeqty)
+
+router_user.get('/addToCart/:id' ,block.ifBlocked,userController.addToCart)
+router_user.get('/cart',isLogin,block.ifBlocked,userController.loadCart)
+router_user.get('/deleteCart/:id' ,block.ifBlocked,isLogin,userController.deletecart)
+
+
+router_user.post('/changeqty',block.ifBlocked,userController.changeqty)
 // router_user.post('/changeqty/:id',userController.decqty)
 
 
 
 
-router_user.get('/addToWishlisT/:id',userController.addToWishlist)
-router_user.get('/wishlist',isLogin,userController.loadWishlist)
+router_user.get('/addToWishlisT/:id',block.ifBlocked,userController.addToWishlist)
+router_user.get('/wishlist',block.ifBlocked,isLogin,userController.loadWishlist)
 
-router_user.get('/userProfile' ,isLogin,userController.userProfile)
+router_user.get('/userProfile' ,block.ifBlocked,isLogin,userController.userProfile)
 
-router_user.get("/editUserProfile" ,isLogin,userController.editUserProfile)
+router_user.get("/editUserProfile" ,block.ifBlocked,isLogin,userController.editUserProfile)
 
 router_user.post("/updateUserProfile/:id",userController.updateUserProfile)
 
-router_user.get('/AddAddress' ,isLogin,userController.loadAddAddress)
+router_user.get('/AddAddress' ,block.ifBlocked,isLogin,userController.loadAddAddress)
 router_user.post('/addAddress/:id',userController.addAddress)
 
 
-router_user.get('/addressList',isLogin,userController.loadAddressList)
-router_user.get('/editAddress/:id',isLogin,userController.loadEditAddress)
-router_user.post('/updateAddress/:id',userController.updateAddress)
-router_user.get('/deleteAddress/:id',isLogin,userController.deleteAddress)
+router_user.get('/addressList',block.ifBlocked,isLogin,userController.loadAddressList)
+router_user.get('/editAddress/:id',block.ifBlocked,isLogin,userController.loadEditAddress)
+router_user.post('/updateAddress/:id',block.ifBlocked,userController.updateAddress)
+router_user.get('/deleteAddress/:id',block.ifBlocked,isLogin,userController.deleteAddress)
 
 
-router_user.get('/deletewish/:id',userController.deleteWish)
-router_user.get('/UserProfile',isLogin,userController.userProfile)
+router_user.get('/deletewish/:id',block.ifBlocked,userController.deleteWish)
+router_user.get('/UserProfile',block.ifBlocked,isLogin,userController.userProfile)
 
 
 
-router_user.get('/checkOut',isLogin,userController.checkOut)
+router_user.get('/checkOut',block.ifBlocked,isLogin,userController.checkOut)
 router_user.post('/checkoutAddress',isLogin,userController.checkoutaddress)
 
 
 
 router_user.post('/placeOrder',isLogin,userController.toPayment)
-router_user.get('/orderConfirmed',isLogin,userController.orderConfirm)
+router_user.get('/orderConfirmed',block.ifBlocked,isLogin,userController.orderConfirm)
 
 
 
-router_user.post('/verifyPayment',isLogin,userController.verifyPayment)
+router_user.post('/verifyPayment',block.ifBlocked,isLogin,userController.verifyPayment)
 
 
-router_user.get('/orderConfirmation',isLogin,userController.loadorderConfirmation)
-router_user.get('/orderDetails',isLogin,userController.loadMyOrders)
+router_user.get('/orderConfirmation',block.ifBlocked,isLogin,userController.loadorderConfirmation)
+router_user.get('/orderDetails',block.ifBlocked,isLogin,userController.loadMyOrders)
 
 
 
-router_user.get('/cancelOrder/:id',isLogin,userController.cancelOrder)
-router_user.get('/orderDetails/:id',isLogin,userController.orderDetails)
+router_user.get('/cancelOrder/:id',block.ifBlocked,isLogin,userController.cancelOrder)
+
+router_user.get('/returnOrder/:id',block.ifBlocked,isLogin,userController.returnOrder)
+router_user.get('/orderDetails/:id',block.ifBlocked,isLogin,userController.orderDetails)
 
 
 router_user.post('/checkCoupon/:id',isLogin,userController.applyCoupon)
 
 
 
-router_user.get('/editCheckoutAddress/:id',isLogin,userController.editCheckoutAddress)
+router_user.get('/editCheckoutAddress/:id',block.ifBlocked,isLogin,userController.editCheckoutAddress)
 
 router_user.post('/addReview/:id',isLogin,userController.addReview)
+
+
+
+router_user.get('/SomeThingWentWrong',block.ifBlocked,isLogin,userController.wentWrong)
 
 module.exports = router_user;

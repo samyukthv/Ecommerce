@@ -45,7 +45,7 @@
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
                             <h2>Wishlist Products</h2>
-                            <p>Home <span>-</span>Wishlist Products</p>
+                             <p><a href="/" style="text-decoration: none;">Home</a><span>-</span>Wishlist Products</p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                                 </td>
                                 <td>
                                     <div class="col-md-12 text-right">
-                                      <a href="/addToCart/{{this.productdt._id}}">  <button value="" class="btn_3" style=" padding: 5px 10px; font-size: 14px; width: 120px;">
+                                      <a onclick="addToCart('{{this.productdt._id}}')">  <button value="" class="btn_3" style=" padding: 5px 10px; font-size: 14px; width: 120px;">
                                             add to cart
                                         </button></a>
                                     </div>
@@ -170,6 +170,66 @@
     </section>
     {{/if}}
     <!--================End Cart Area =================-->
+
+<script>
+
+    function addToCart(proId) {
+        $.ajax({
+            url: '/addToCart/' + proId,
+            method: 'get',
+            success: (response) => {
+                if (response.message === "Product already in cart") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Product already in cart',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else if (response.message === "Product added to cart") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Product added to cart',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else if (response.message === "hello") {
+                    location.href = '/login'
+
+                    // Handle other response messages
+                }
+                else if (response.message === "Product is out of stock"){
+                      Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'product is out of stock',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
+                }
+            },
+            error: (error) => {
+                // Handle errors
+            }
+        });
+
+    }
+
+
+
+    
+
+
+</script>
+
+
+
+
+
+
+
 
     <!--::footer_part start::-->
     {{>userFooter}}

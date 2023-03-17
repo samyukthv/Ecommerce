@@ -59,6 +59,10 @@ var userSchema = new mongoose.Schema({
         type:Number,
         default:0,
 
+    },
+    wallet:{
+        type:Number,
+        default:0
     }
 
     
