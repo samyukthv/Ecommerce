@@ -1,10 +1,10 @@
 var express = require('express');
 const app=require('../index')
-const { adminLog, loadLogin, adminHome, adminLogout,  userList, blockUser, unblockUser, orderList, viewDetails, vieworder, displayCoupon, addCoupon, insertCoupon, deleteCoupon, blockCoupon, unblockCoupon, editCoupon, updateCoupon, orderStatus, loadSalesReport, generateReport, downloadPdf, downloadExcel, loadAddBanner, loadBannerList, addNewBanner, listBanner, editBanner, updateBanner, blockBanner, unblockBanner } = require('../controller/adminController');
+const { adminLog, loadLogin, adminHome, adminLogout,  userList, blockUser, unblockUser, orderList, vieworder, displayCoupon, addCoupon, insertCoupon,  blockCoupon, unblockCoupon, editCoupon, updateCoupon, orderStatus, loadSalesReport, generateReport, downloadPdf, downloadExcel, loadAddBanner, addNewBanner, listBanner, editBanner, updateBanner, blockBanner, unblockBanner } = require('../controller/adminController');
 const upload= require('../multer')
 var admin_router = express.Router();
 const adminAuth=require('../middlerware/adminAuth');
-
+const adminController=('../controller/')
 const productController=require('../controller/productcontroller')
 
 const categoryController =require('../controller/categorycontroller')

@@ -592,13 +592,6 @@ const loadAddBanner=async(req,res)=>{
 
 
 
-const loadBannerList=async(req,res)=>{
-  try {
-    res.render('admin/bannerList',{layout:"admin_layout"})
-  } catch (error) {
-    console.log(error.message);
-  }
-}
 
 
 
@@ -758,10 +751,11 @@ module.exports = {
   downloadPdf,
   downloadExcel,
   loadAddBanner,
-  loadBannerList,
+ 
   addNewBanner,
   listBanner,
   editBanner,
+  
   
   updateBanner,
   unblockBanner,
