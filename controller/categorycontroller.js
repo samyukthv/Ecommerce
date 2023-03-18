@@ -173,7 +173,7 @@ const loadAddCategory = async (req, res) => {
 
   module.exports={
 
-    loadAddCategory,
+  loadAddCategory,
   addNewCategory,
   listCategory,
   editCategory,
