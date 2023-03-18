@@ -11,9 +11,8 @@ const session=require('express-session')
 const nocache=require('nocache')
 const bodyParser=require('body-parser')
 const app=express()
-const ImageZoom=require('js-image-zoom')
 const createError = require('http-errors')
-const fs = require('fs')
+
 
 const jquery=require('jquery')
 global. jQuery= jquery
