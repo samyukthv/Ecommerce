@@ -39,7 +39,6 @@ admin_router.get('/unblockProduct/:id',adminAuth.isLogin,productController.unblo
 
 admin_router.get('/blockCoupon/:id',adminAuth.isLogin,adminController.blockCoupon)
 admin_router.get('/unblockCoupon/:id',adminAuth.isLogin,adminController.unblockCoupon)
-adminController.
 
 admin_router.get('/editProduct' ,adminAuth.isLogin,productController.editProduct)
 admin_router.get('/editCoupon/:id',adminAuth.isLogin,adminController.editCoupon)
@@ -51,7 +50,7 @@ admin_router.post('/updateProduct/:id',upload.array('images',3),productControlle
 admin_router.get('/userList',adminAuth.isLogin,adminController.userList)
 admin_router.get('/blockUser',adminController.blockUser)
 admin_router.get('/unblockUser',adminController.unblockUser)
-adminController.
+
 
 
 admin_router.get('/orderList',adminAuth.isLogin,adminController.orderList)
