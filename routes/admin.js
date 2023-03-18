@@ -4,7 +4,7 @@ const { adminLog, loadLogin, adminHome, adminLogout,  userList, blockUser, unblo
 const upload= require('../multer')
 var admin_router = express.Router();
 const adminAuth=require('../middlerware/adminAuth');
-const adminController=('../controller/')
+// const adminController=('../controller/')
 const productController=require('../controller/productcontroller')
 
 const categoryController =require('../controller/categorycontroller')
