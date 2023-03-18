@@ -270,14 +270,16 @@ const otpVerify = async (req, res) => {
 
 //signup
 
-const doSignup = async (req, res) => {
+const doSignup = async(req, res) => {
   try {
+    console.log("helloooooo");
     const userdata = req.body;
     let userdb = await User.findOne({ email: userdata.email });
     if (userdb) {
       res.render("user/register", { userstatus: "email id already exist" });
     } else {
       req.session.userdata = req.body;
+      console.log("insideeeee");
 
       const otpResponse = await client.verify.v2
         .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
@@ -285,11 +287,10 @@ const doSignup = async (req, res) => {
           to: `+91${userdata.mobile}`,
           channel: "sms",
         });
-
       res.redirect("/otpVerify");
     }
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -306,6 +307,7 @@ const otpCompare = async (req, res) => {
         code: otp,
       });
     if (verifiedResponse.status == "approved") {
+      console.log("approveeeeeddddddddddd");
       userdt.password = await bcrypt.hash(userdt.password, 10);
       const data = new User(userdt);
       data.save().then((data) => {
@@ -320,7 +322,7 @@ const otpCompare = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    console.log(error,"asdasdsadasdadsaasd");
   }
 };
 
