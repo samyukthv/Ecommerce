@@ -1,31 +1,31 @@
 {{>userHeader}}
 <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg" style="height: 350px;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="breadcrumb_iner">
-            <div class="breadcrumb_iner_item">
-              <h2>Edit Profile</h2>
-              <p>Home <span>-</span>Edit Profile</p>
+    <section class="breadcrumb breadcrumb_bg" style="height: 350px;">
+        <div class="container">
+            <div class="row justify-content-center" style="height: 300px;">
+                <div class="col-lg-8" style="height: 300px;">
+                    <div class="breadcrumb_iner" style="height: 300px;">
+                        <div class="breadcrumb_iner_item" style="height: 300px;">
+                            <h2>Products</h2>
+                            <p><a href="/" style="text-decoration: none;">Home</a> <span>-</span>Products</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
   <!-- breadcrumb start-->
   <!--================End Home Banner Area =================-->
 
 <section style="background-color: #ecfdff">
-  <div class="container py-5 col-md-6">
+  <div class="container py-5">
    
   
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLlnTa1_hvfsAbfb9EH7UlbrgkufjBlwEXIw&usqp=CAU" alt=""
+            <img src="assetuser/img/avathar2.png" alt=""
               class="rounded-circle img-fluid" style="width: 150px;">
               {{#each userdt}}
             <h5 class="my-3">{{this.firstname}}</h5>
@@ -36,12 +36,11 @@
             </div>
           </div>
         </div>
-        
       </div>
       
-        <div class="col-md-8 border-right " style="width: 100%;">
-          <form action="/updateUserProfile/{{this._id}}"  method="post">
-            <div class="p-3 py-5" style="width: 100%;">
+        <div class="col-md-8" style="">
+          <form action="/updateUserProfile/{{this._id}}"  method="post" >
+            <div class="p-3 py-5" style="width: 100%; border: 0px;">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
@@ -67,6 +66,7 @@
             </form>
         </div>
         </div>
+    
     </div>
 
   </div>

@@ -31,15 +31,19 @@
 
             <h2 class="mb-4">Enter coupon details</h2>
             <form id="coupon-form-submit">
-                <p></p>
+          
 
                 <input type="text" placeholder="Enter coupon code" id="coupon" name="coupon">
                 {{!-- <input type="hidden" placeholder="Enter coupon code" id="coupon" name="coupon"> --}}
 
-                <button class="btn_3" type="submit" form="coupon-form-submit"> Apply Coupon</button>
+                <button class="btn_3" type="submit" form="coupon-form-submit" id="applyCoupon"> Apply Coupon</button>
+              
                 <small id="codestate"></small>
+                
 
             </form>
+                <button style="margin-top: 10px;"  onclick="cancelCoupon()" class="btn_3" id="cancelBtn" >cancel coupons</button>
+          {{!-- <a href="/cCoupon"><button class="btn_3">new cancel</button></a> --}}
 
         </div>
         <div class="billing_details ">
@@ -130,7 +134,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#"  style="text-decoration: none; pointer-events: none;">Coupon Discount
+                                <a href="#" id="dicount"  style="text-decoration: none; pointer-events: none;">Coupon Discount
+                                    
                                     <span id="disc" name="disc" class="text-success">0</span>
 
                                     <input type="hidden" name="total" value="{{total}}" form="form">
@@ -139,6 +144,9 @@
                             <li>
                                 <a href="#"  style="text-decoration: none; pointer-events: none;">Total
                                     <span id="total">&#8377;{{total}}</span>
+
+                                    <input type="hidden" name="" id="hTotal"  value="{{total}}">
+
 
                                     {{!-- <input type="hidden" name="total" value="{{total}}" form="form"> --}}
                                 </a>
@@ -189,8 +197,8 @@
 
                         <input type="hidden" name="userId" value="{{id}}" form="form">
 
-                        <button class="btn_3" style="border:transparent;" type="submit" form="form"> proceed to
-                            payment</button>
+                        <button class="btn_3" style="border:transparent;" type="submit" form="form"> confirm order
+                            </button>
                     </div>
                     </form>
                 </div>
@@ -259,6 +267,34 @@
 <style>
     
 </style>
+
+
+<script>
+    function cancelCoupon(){
+    console.log("reached")
+   
+    let coupon = document.getElementById('coupon').value
+    
+    console.log(coupon +"couponnnnnnnnnnnn")
+    $.ajax({
+        url:"/cancelCoupon/"+ coupon,
+        method:'post',
+          success: (response) => {
+          Swal.fire({
+            position: 'top-end',
+            title: 'coupon cancelled successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          $('#coupon-form-submit').load('/checkOut #coupon-form-submit')
+            $('#dicount').load('/checkOut #dicount')
+             $("#cancelBtn").hide();
+        }
+
+    })
+}
+
+    </script>
 
 
 <script>
@@ -331,6 +367,17 @@
 
 
 <script>
+
+
+
+const smallTag = document.getElementById('codestate');
+const cancelBtn = document.getElementById('cancelBtn');
+
+if (smallTag.innerText.trim() !== '') {
+  cancelBtn.style.display = 'block';
+} else {
+  cancelBtn.style.display = 'none';
+}
 
 
 
@@ -428,7 +475,6 @@
 
 
 
-
     $("#coupon-form-submit").submit((e) => {
         let couponValue = document.getElementById('coupon').value
         // let discountValue = document.getElementById('discount').value
@@ -451,6 +497,8 @@
                     document.getElementById('disc').innerText = '$' + response.discountPrice
                     document.getElementById('codestate').style.color = "green"
                     document.getElementById('codestate').innerText = 'Coupon applied successfully'
+                      $("#cancelBtn").show();
+                      $("#applyCoupon").hide();
                 } else if (response.used) {
                     document.getElementById('codestate').style.color = "red"
                     document.getElementById('codestate').innerText = 'Coupon already used!'

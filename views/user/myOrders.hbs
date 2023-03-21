@@ -82,12 +82,18 @@
                       return order
                     </button>
                   </a>
-                  {{else ifCond ./status '==' "pending" }}
+                  {{else ifCond ./status '==' "Placed" }}
                   <a href="/cancelOrder/{{./_id}}">
                     <button class="btn btn-outline-primary btn-sm mt-2" type="button">
                       cancel order
                     </button>
                   </a>
+                   {{!-- {{else ifCond ./status '==' "Placed" }}
+                  <a href="/cancelOrder/{{./_id}}">
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button">
+                      cancel order
+                    </button>
+                  </a> --}}
                   {{/ifCond}}
 
 

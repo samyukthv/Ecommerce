@@ -1,24 +1,24 @@
 {{>userHeader}}
 <!-- breadcrumb start-->
-<section class="breadcrumb breadcrumb_bg" style="height: 350px;">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="breadcrumb_iner">
-          <div class="breadcrumb_iner_item">
-            <h2>Edit Address</h2>
-            <p>Home <span>-</span>Edit Address</p>
-          </div>
+  <section class="breadcrumb breadcrumb_bg" style="height: 350px;">
+        <div class="container">
+            <div class="row justify-content-center" style="height: 300px;">
+                <div class="col-lg-8" style="height: 300px;">
+                    <div class="breadcrumb_iner" style="height: 300px;">
+                        <div class="breadcrumb_iner_item" style="height: 300px;">
+                            <h2>Products</h2>
+                            <p><a href="/" style="text-decoration: none;">Home</a> <span>-</span>Products</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 <!-- breadcrumb start-->
 <!--================End Home Banner Area =================-->
 
 <section style="background-color: #ecfdff">
-  <div class="container py-5 col-md-6">
+  <div class="container py-5">
 
 
     <div class="row ">
@@ -27,8 +27,8 @@
         <div class="card mb-4 mt-5">
           <div class="card-body text-center">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLlnTa1_hvfsAbfb9EH7UlbrgkufjBlwEXIw&usqp=CAU"
-              alt="" class="rounded-circle img-fluid" style="width: 150px;">
+              src="https://www.w3schools.com/howto/img_avatar.png"
+              alt="avathar" class="rounded-circle img-fluid" style="width: 150px;">
 
             <h5 class="my-3">{{user1.firstname}}</h5>
 
@@ -44,7 +44,7 @@
       </div>
 
 
-      <div class="col-md-8 border-right " style="width: 100%;">
+      <div class="col-md-8">
         {{#each userdt.address}}
         <form action="/updateAddress/{{this._id}}" method="post">
 
@@ -70,7 +70,7 @@
                   placeholder="pincode" value="{{this.pincode}}" name="pincode"></div>
               <input type="hidden" name="id" value="">
       
-              <div class="mt-5 text-center mb-3"><button class="btn btn-primary profile-button" type="submit">Save Edit</button></div>
+              <div class="mt-5 text-center mb-3"><button class=" btn_3" type="submit">Save Edit</button></div>
             </div>   
             </div>
               

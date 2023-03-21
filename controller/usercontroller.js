@@ -121,6 +121,7 @@ const loadProducts = async (req, res) => {
 
 const categoryFilter = async (req, res) => {
   try {
+    const searchRegex = new RegExp(req.query.search, "i");
 
     const pageNum = req.query.page || 1;
     const perPage = 6;
@@ -131,7 +132,7 @@ const categoryFilter = async (req, res) => {
     console.log(category1);
 
     let data = await productsCollection
-      .find({ status: true, categoryId: id }).skip((pageNum - 1) * perPage).limit(perPage)
+      .find({ status: true, categoryId: id , productName: searchRegex }).skip((pageNum - 1) * perPage).limit(perPage)
       .populate("categoryId")
       .lean()
 
@@ -145,17 +146,19 @@ const categoryFilter = async (req, res) => {
 
 const highLow = async (req, res) => {
   try {
+    const searchRegex = new RegExp(req.query.search, "i");
 
     const pageNum = req.query.page || 1;
     const perPage = 6;
     const userdata = req.session.userid
 
-    const data = await productsCollection.find({ status: true}).skip((pageNum - 1) * perPage) .limit(perPage).sort({price: -1}).lean()
+    const data = await productsCollection.find({ status: true , productName: searchRegex }).skip((pageNum - 1) * perPage) .limit(perPage).sort({price: -1}).lean()
     const category1 = await category.find({}).lean();
     res.render("user/products", { data, userdata, category1 });
     
   } catch (error) {
-    console.log(error.message);
+    cons
+    ole.log(error.message);
   }
 
 }
@@ -163,11 +166,11 @@ const highLow = async (req, res) => {
 
 const lowHigh = async (req, res) => {
   try {
-
+    const searchRegex = new RegExp(req.query.search, "i");
     const pageNum = req.query.page || 1;
     const perPage = 6;
     const userdata = req.session.userid
-    const data = await productsCollection.find({ status: true}).skip((pageNum - 1) * perPage).limit(perPage).sort({price:1}).lean()
+    const data = await productsCollection.find({ status: true,productName: searchRegex }).skip((pageNum - 1) * perPage).limit(perPage).sort({price:1}).lean()
     const category1 = await category.find({}).lean();
     res.render("user/products", { data, userdata, category1 });
 
@@ -1151,7 +1154,11 @@ const checkOut = async (req, res) => {
 const applyCoupon = async (req, res) => {
   try {
     let code = req.params.id;
+    console.log("helloooo");
     console.log(code);
+    console.log("helloooo");
+    req.session.coupon=code
+    console.log(req.session.coupon);
     if (req.session.userid) {
       let userdata = req.session.userid;
       const userId = await User.findOne({ email: userdata }, {});
@@ -1176,6 +1183,8 @@ const applyCoupon = async (req, res) => {
               (userId.totalbill * discount) / 100
             );
             userId.totalbill = userId.totalbill - discountPrice;
+            ///////////////////////////////////////////
+            //////////////////////////////////////////////////////////
             await userId.save();
             await Coupon.findOneAndUpdate(
               { couponId: code },
@@ -1202,7 +1211,49 @@ const applyCoupon = async (req, res) => {
   } catch (error) {
    res.redirect('/SomeThingWentWrong')
   }
-};
+}
+
+
+const cancelCoupon =async(req,res)=>{
+  try {
+    const userdata=req.session.userid
+    const user= await User.findOne({email:userdata})
+    const userId=user._id
+    
+    const code= req.params.code
+    console.log(code);
+
+    const updatedCoupon = await Coupon.findOneAndUpdate(
+      { couponId: code },
+      { $pull: { user: userId } },
+      { new: true }
+    );
+    
+   
+
+
+    res.json({success:true})
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+const cCoupon=async(req,res)=>{
+  try {
+    const userdata=req.session.userid
+    const cp=req.session.code
+    const user= await User.findOne({email:userdata})
+    const userId=user._id
+    const updatedCoupon = await Coupon.findOneAndUpdate(
+      { couponId: cp },
+      { $pull: { user: userId } },
+      { new: true }
+    );
+    res.redirect('/checkOut')
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 const editCheckoutAddress = async (req, res) => {
   try {
@@ -1283,4 +1334,6 @@ module.exports = {
   lowHigh,
   highLow,
   wentWrong,
+  cancelCoupon,
+  cCoupon
 };

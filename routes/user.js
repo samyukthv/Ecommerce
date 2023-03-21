@@ -30,6 +30,13 @@ router_user.get('/categoryFilter/:id',block.ifBlocked, userController.categoryFi
 router_user.get('/highLow',block.ifBlocked, userController.highLow)
 router_user.get('/lowHigh',block.ifBlocked, userController.lowHigh)
 
+router_user.post('/search',block.ifBlocked, userController.categoryFilter)
+router_user.post('/search',block.ifBlocked, userController.highLow)
+router_user.post('/search',block.ifBlocked, userController.lowHigh)
+
+
+
+
 router_user.get('/login' ,block.ifBlocked, isLogout,userController.loadUserLogin)
 router_user.get('/register',block.ifBlocked, isLogout,userController.loadUserRegister)
 router_user.get('/otpVerify',block.ifBlocked, isLogout,userController.otpVerify)
@@ -113,6 +120,10 @@ router_user.get('/orderDetails/:id',block.ifBlocked,isLogin,userController.order
 
 
 router_user.post('/checkCoupon/:id',isLogin,userController.applyCoupon)
+
+router_user.post('/cancelCoupon/:code',block.ifBlocked,isLogin,userController.cancelCoupon)
+
+router_user.get('/cCoupon',block.ifBlocked,isLogin,userController.cCoupon)
 
 
 
