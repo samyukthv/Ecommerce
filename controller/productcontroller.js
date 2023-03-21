@@ -115,7 +115,7 @@ const updateProduct = async (req, res) => {
     for (file of req.files) {
       imageName.push(file.filename);
     }
-    if (req.files) {
+    if (req.files.lenght!=0) {
       await Product.updateOne(
         { _id: req.params.id },
         {
