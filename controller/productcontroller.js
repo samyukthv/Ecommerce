@@ -111,11 +111,12 @@ const updateProduct = async (req, res) => {
   try {
 
    const  category =await Category.findOne({categoryName:req.body.categoryName})
-    const imageName = [];
-    for (file of req.files) {
-      imageName.push(file.filename);
-    }
-    if (req.files.lenght!=0) {
+   const imageName = [];
+   for (file of req.files) {
+    imageName.push(file.filename);
+  }
+    if (req.files.length!==0) {
+   
       await Product.updateOne(
         { _id: req.params.id },
         {

@@ -14,6 +14,7 @@ const Coupon = require("../models/coupon_Schema");
 const { v4: uuidv4 } = require("uuid");
 const category = require("../models/category_schema");
 const Razorpay = require("razorpay");
+
 var session;
 
 var instance = new Razorpay({
@@ -281,9 +282,9 @@ const doSignup = async(req, res) => {
     if (userdb) {
       res.render("user/register", { userstatus: "email id already exist" });
     } else {
-      req.session.userdata = req.body;
-      console.log("insideeeee");
 
+      req.session.userdata = req.body;
+      console.log("insideeeee")
       const otpResponse = await client.verify.v2
         .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
         .verifications.create({
@@ -573,6 +574,9 @@ const addToWishlist = async (req, res) => {
         { email: userdata },
         { $push: { wishlist: { productdt: req.params.id } } }
       );
+      console.log("heee");
+      console.log(typeof req.params.id);
+      console.log(typeof productdt );
       res.json({ message: "Product added to wishlist" });
     } else {
       res.json({ message: "hello" });
@@ -590,6 +594,7 @@ const loadWishlist = async (req, res) => {
       .lean()
       .exec();
     res.render("user/wishlist", { userdata, wishfind });
+    console.log(wishfind);
 
     // if (wishfind.wishlist.length <= 0) {
     //   res.render("user/wishlist", {

@@ -15,7 +15,7 @@ let session;
 
 const loadLogin = async (req, res) => {
   try {
-    res.render("admin/admin_login", { layout: "admin_layout" });
+    res.render("admin/admin_login", );
   } catch (error) {
     console.log(error.message);
   }
