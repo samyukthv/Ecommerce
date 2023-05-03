@@ -14,6 +14,7 @@ const Coupon = require("../models/coupon_Schema");
 const { v4: uuidv4 } = require("uuid");
 const category = require("../models/category_schema");
 const Razorpay = require("razorpay");
+const { log } = require("console");
 
 var session;
 
@@ -291,6 +292,7 @@ const doSignup = async(req, res) => {
           to: `+91${userdata.mobile}`,
           channel: "sms",
         });
+        console.log("after the otp");
       res.redirect("/otpVerify");
     }
   } catch (error) {
@@ -841,6 +843,8 @@ const toPayment = async (req, res) => {
     
 
       if (req.body.paymentType === "cash on delivery") {
+
+        console.log("this is cash no delivery");
         if (!Array.isArray(orderDetails.productid)) {
           orderDetails.productid = [orderDetails.productid];
         }
@@ -937,7 +941,7 @@ const toPayment = async (req, res) => {
         }
 
         const order_id = "order_id_";
-        orderDetails.status = "failed";
+        orderDetails.status = "Placed";
         orderDetails.couponCode = req.body.coupon;
         orderDetails.discount = req.body.discount;
         orderDetails.total = orderDetails.total - req.body.discount;
@@ -1056,12 +1060,14 @@ const cancelOrder = async (req, res) => {
     id = req.params.id;
     const orderdt = await order.findOne({ _id: id });
 
-    if (orderdt.status == "pending") {
+    if (orderdt.status == "Placed") {
       await order.updateOne({ _id: id }, { $set: { status: "canceled" } });
       if (
+        
         orderdt.paymentType == "online payment" ||
         orderdt.paymentType == "wallet payment"
       ) {
+        console.log("if");
         const user = await User.findOne({ email: userdata });
         const walletBalance = user.wallet + orderdt.total;
         await User.updateOne(
@@ -1070,6 +1076,7 @@ const cancelOrder = async (req, res) => {
         );
       }
     } else {
+      console.log("else");
       res.json({success:true});
     }
 
@@ -1095,8 +1102,6 @@ const returnOrder = async (req, res) => {
         { email: userdata },
         { $set: { wallet: walletBalance } }
       );
-    } else {
-      res.json({success:true});;
     }
 
     res.redirect("/orderDetails");
