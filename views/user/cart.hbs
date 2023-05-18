@@ -38,6 +38,9 @@
 
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
+  <section id="hy">
+    
+  
   <section class="breadcrumb breadcrumb_bg" style="height: 350px;">
     <div class="container">
       <div class="row justify-content-center">
@@ -56,7 +59,9 @@
 
   <!--================Cart Area =================-->
 
-  {{#if fill}}
+  
+   {{!-- {{#if fill}} --}}
+    {{#ifCond cartfind.cart.length '==' 0}}
 
   <div class="card-body cart" style="  background-color: #ECFDFF; height: 500px;">
     <div class="col-sm-12 empty-cart-cls text-center">
@@ -167,7 +172,8 @@
         </div>
       </div>
   </section>
-  {{/if}}
+  </section>
+  {{/ifCond}}
 
 
   <style>
@@ -232,7 +238,7 @@
             showConfirmButton: false,
             timer: 1500
           })
-          $('#table').load('/cart #table')
+          $('#hy').load('/cart #hy')
         }
       })
     }

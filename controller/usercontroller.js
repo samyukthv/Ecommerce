@@ -287,7 +287,8 @@ const doSignup = async(req, res) => {
       req.session.userdata = req.body;
       console.log("insideeeee")
       const otpResponse = await client.verify.v2
-        .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
+        // .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
+        .services("VA0ad8ed126dbbb1fcdebf6e8f7350bf7f")
         .verifications.create({
           to: `+91${userdata.mobile}`,
           channel: "sms",
@@ -307,7 +308,8 @@ const otpCompare = async (req, res) => {
     otp = req.body.otp;
 
     const verifiedResponse = await client.verify.v2
-      .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
+      .services("VA0ad8ed126dbbb1fcdebf6e8f7350bf7f")
+      // .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
       .verificationChecks.create({
         to: `+91${userdt.mobile}`,
         code: otp,
@@ -350,7 +352,7 @@ const otpGenerate = async (req, res) => {
     let userdb = await User.findOne({ mobile: usermob });
     if (userdb) {
       const otpResponse = await client.verify.v2
-        .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
+        .services("VA0ad8ed126dbbb1fcdebf6e8f7350bf7f")
         .verifications.create({
           to: `+91${usermob}`,
           channel: "sms",
@@ -383,7 +385,7 @@ const otpCompareForgotPass = async (req, res) => {
     userdt = req.body.mobile;
     otp = req.body.otp;
     const verifiedResponse = await client.verify.v2
-      .services("VA46788dbe2dfeaeadd44acc1fc2e4c345")
+      .services("VA0ad8ed126dbbb1fcdebf6e8f7350bf7f")
       .verificationChecks.create({
         to: `+91${userdt}`,
         code: otp,
@@ -691,13 +693,15 @@ const loadCart = async (req, res) => {
       { email: userdata },
       { $set: { totalbill: totalcart } }
     );
-    if (cartfind.cart.length <= 0) {
-      res.render("user/cart", {
-        userdata,
-        fill: "cart is empty please fill the cart",
-      });
-    }
-    res.render("user/cart", { userdata, cartfind, totalcart });
+    // if (cartfind.cart.length <= 0) {
+    //   res.render("user/cart", {
+    //     userdata,
+    //     fill: "cart is empty please fill the cart",
+    //   });
+    // }
+
+    let fill=cartfind.cart.length
+    res.render("user/cart", { userdata, cartfind, totalcart ,fill});
   } catch (error) {
     console.log(error.message);
   }
@@ -870,6 +874,7 @@ const toPayment = async (req, res) => {
         orderDetails.discount = req.body.discount;
         orderDetails.total = orderDetails.total - req.body.discount;
         orderDetails.orderId = order_id + uuidv4();
+        orderDetails.date= Date.now()
         const latestorder = orderDetails.orderId;
         console.log(latestorder);
 
@@ -908,6 +913,7 @@ const toPayment = async (req, res) => {
           orderDetails.discount = req.body.discount;
           orderDetails.total = orderDetails.total - req.body.discount;
           orderDetails.orderId = order_id + uuidv4();
+          orderDetails.date= Date.now()
           const latestorder = orderDetails.orderId;
           console.log(latestorder);
 
@@ -946,6 +952,7 @@ const toPayment = async (req, res) => {
         orderDetails.discount = req.body.discount;
         orderDetails.total = orderDetails.total - req.body.discount;
         orderDetails.orderId = order_id + uuidv4();
+        orderDetails.date= Date.now()
         const latestorder = orderDetails.orderId;
         console.log(latestorder);
 
@@ -974,13 +981,13 @@ const orderConfirm = async (req, res) => {
       { email: userdata },
       { $pull: { cart: {} } }
     );
-
+console.log("orderrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
     const latestOrder = await order
       .findOne({})
-      .sort({ date: -1, seconds: -1 })
+      .sort({ date: -1 })
       .populate("products.productId")
       .lean();
-    console.log("order confirmation _" + latestOrder.paymentType);
+    console.log( latestOrder);
     res.render("user/orderConfirmation", { userdata, latestOrder });
   } catch (error) {
     console.log(error.message);
