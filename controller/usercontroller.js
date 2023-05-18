@@ -18,10 +18,11 @@ const { log } = require("console");
 
 var session;
 
+
 var instance = new Razorpay({
   key_id: "rzp_test_JIiuMLMMvE8WDr",
   key_secret: "tTIQJkJw52gKqzn1iE0GLgBC",
-  
+
 });
 
 const loadHome = async (req, res) => {
